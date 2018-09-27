@@ -1,15 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row">
-    <div class="col-xs-12 text-center jumbotron">
-        <h1>The Pantry</h1>
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1>The Pantry</h1>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-3 col-md-offset-3 text-center">
-        <button>Find a recipe</button>
-    </div>
-    <div class="col-xs-12 col-md-3 text-center">
-        <button>Add a recipe</button>
+    <div class="row">
+        <div class="card-image col s12 col m3 col offset-m3 center-align">
+            <a href="{{ url_for('all_recipes') }}"><img src="images/sample-1.jpg"><span class="card-title">Find a recipe</span></a>
+        </div>
+        <div class="card-image col s12 col m3 center-align">
+            <a href="{{ url_for('to_add_recipe_page') }}"><img src="images/sample-1.jpg"><span class="card-title">Add recipe</span></a>
+        </div>
     </div>
 </div>
 {% endblock %}
