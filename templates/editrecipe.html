@@ -1,88 +1,85 @@
 {% extends 'base.html' %} {% block content %}
-<form action="{{ url_for('insert_recipe') }}" method='POST'>
+<form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method='POST'>
     <div class="input-field col s6">
-        <input id="username" name="username" type="text" class="validate">
+        <input id="username" name="username" type="text" class="validate" value="{{recipe.username}}">
         <label for="first_name">Username</label>
     </div>
     <div class="input-field col s6">
-        <input id="name_of_dish" name="name_of_dish" type="text" class="validate">
+        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" value="{{recipe.name_of_dish}}">
         <label for="last_name">Name of the Dish</label>
     </div>
     <div class="input-field col s6">
         <select id="serves" name="serves">
           <option value="" disabled selected>How many does it serve?</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6+">6+</option>
+          {% for number in serves %}
+          <option value="{{number}}" selected>{{number}}</option>
+          {% endfor %}
         </select>
         <label>Serves</label>
     </div>
     <div class="input-field col s6">
         <select id="cuisine" name="cuisine">
           <option value="" disabled selected>Choose Cuisine</option>
-          <option value="African">African</option>
-          <option value="American">American</option>
-          <option value="British">British</option>
-          <option value="Carribean">Carribean</option>
-          <option value="Chinese">Chinese</option>
-          <option value="East European">East European</option>
-          <option value="French">French</option>
-          <option value="Greek">Greek</option>
-          <option value="Indian">Indian</option>
-          <option value="Irish">Irish</option>
-          <option value="Italian">Italian</option>
-          <option value="Japanese">Japanese</option>
-          <option value="Korean">Korean</option>
-          <option value="Mexican">Mexican</option>
-          <option value="Middle Eastern and Persian">Middle Eastern and Persian</option>
-          <option value="Nordic">Nordic</option>
-          <option value="Spanish">Spanish</option>
-          <option value="Thai">Thai</option>
-          <option value="Other">Other</option>
+          {% for cuisine in cuisine %}
+          <option value="{{cuisine}}" selected>{{cuisine}}</option>
+          {% endfor %}
         </select>
         <label>Cuisine</label>
     </div>
     <div class="input-field col s12">
-        <textarea id="ingredients" name="ingredients" class="materialize-textarea"></textarea>
+        <textarea id="ingredients" name="ingredients" class="materialize-textarea">{{recipe.ingredients}}</textarea>
         <label for="textarea1">Ingredients</label>
     </div>
     <div class="input-field col s12">
-        <textarea id="method" name="method" class="materialize-textarea"></textarea>
+        <textarea id="method" name="method" class="materialize-textarea">{{recipe.method}}</textarea>
         <label for="textarea1">Method</label>
     </div>
     <div class="switch">
         <label>
           Contain Nuts?
+          {% if recipe.contain_nuts %}
+          <input id="contain_nuts" name="contain_nuts" type="checkbox" checked>
+          {% else %}
           <input id="contain_nuts" name="contain_nuts" type="checkbox">
+          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Contain Gluten?
+          {% if recipe.contain_gluten %}
+          <input id="contain_gluten" name="contain_gluten" type="checkbox" checked>
+          {% else %}
           <input id="contain_gluten" name="contain_gluten" type="checkbox">
+          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Contain lactose?
+          {% if recipe.contain_lactose %}
+          <input id="contain_lactose" name="contain_nuts" type="checkbox" checked>
+          {% else %}
           <input id="contain_lactose" name="contain_lactose" type="checkbox">
+          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Suitable for Batch Cooking?
+          {% if recipe.batch_cook %}
+          <input id="batch_cook" name="batch_cook" type="checkbox" checked>
+          {% else %}
           <input id="batch_cook" name="batch_cook" type="checkbox">
+          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="input-field col s6">
-        <input id="image_url" name="image_url" type="text" class="validate">
+        <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}">
         <label for="first_name">Image URL</label>
     </div>
     <div>

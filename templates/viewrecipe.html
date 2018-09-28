@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="row">
-    <div class="col s12 col offset-m3 col m6 ">
-        <img src="{{ recipe_selected.image_url }}">
+    <div class="col s12 col offset-m3 col m6 view-recipe-imgdiv">
+        <img class="view-recipe-image" src="{{ recipe_selected.image_url }}">
     </div>
 </div>
 <div class="row">
@@ -52,7 +52,7 @@
 </div>
 <div class="row">
     <div class="col s6 col offset-m3 col m6">
-        <a href="{{ url_for('to_edit_recipe') }}" class="waves-effect waves-light btn btn_small">Edit Recipe</a>
+        <a href="{{ url_for('to_edit_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small">Edit Recipe</a>
         <a href="" class="waves-effect waves-light btn btn_small blue">Delete Recipe</a>
     </div>
 </div>

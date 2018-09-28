@@ -1,4 +1,19 @@
+.recipe-images-div{
+    max-width: 350px;
+    overflow: hidden;
+}
+
 .recipe-images {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
+}
+
+.view-recipe-imgdiv{
+    height: 400px;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.view-recipe-image{
+    height: 400px;
 }
