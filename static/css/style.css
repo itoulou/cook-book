@@ -1,3 +1,21 @@
+
+/*------------------------------find recipe page*/
+.side-nav-container{
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    left: 0px;
+    width: 15%;
+}
+.filter-button{
+    width: 100%;
+}
+
+.side-nav-comp li{
+    padding: 10px 5px;
+    
+}
+
 .recipe-images-div{
     max-width: 350px;
     overflow: hidden;
@@ -8,6 +26,8 @@
     width: 200px;
 }
 
+
+/*------------------------------view recipe page*/
 .view-recipe-imgdiv{
     height: 400px;
     max-width: 600px;
@@ -17,3 +37,26 @@
 .view-recipe-image{
     height: 400px;
 }
+
+.thumbs-up p{
+    display: inline;
+}
+.thumbs-up button {
+    background-color: #fff;
+    border: none;
+}
+
+.thumbs-up i {
+    vertical-align: text-bottom;
+    color: #4b4444;
+}
+
+/*.thumbs-up i::before {*/
+/*    vertical-align: text-bottom;*/
+/*    color: #4b4444;*/
+/*}*/
+
+/*.thumbs-up i::after {*/
+/*    vertical-align: text-bottom;*/
+/*    color: #26a69a;*/
+/*}*/

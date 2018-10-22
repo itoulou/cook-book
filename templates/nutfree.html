@@ -23,7 +23,7 @@
 </div>
 <div class="row">
     <div class="col s12 center-align">
-        <h1>All Recipes</h1>
+        <h1>Nut Free</h1>
     </div>
 </div>
 <!--<div>-->
@@ -34,11 +34,11 @@
 <!--    Meals for Batch Cooking-->
 <!--</div>-->
 <div class="row">
-    {% for recipe in recipes %}
+    {% for recipe in nf %}
     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <div class="card-image col s6 col m6 col l4 center-align">
-            <div class="card recipe-images-div center-align">
-                <div class="card-image center-align">
+            <div class="card recipe-images-div">
+                <div class="card-image">
                     <img class="recipe-images" src="{{ recipe.image_url }}">
                 </div>
                 <div class="card-content">
@@ -48,12 +48,6 @@
         </div>
     </a>
     {% endfor %}
-    <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class=""><a href="#!">2</a></li>
-        <li class=""><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    </ul>
 </div>
 
 
