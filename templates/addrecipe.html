@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 <form action="{{ url_for('insert_recipe') }}" method='POST'>
     <div class="input-field col s6">
-        <input id="username" name="username" type="text" class="validate">
+        <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>
         <label for="first_name">Username</label>
     </div>
     <div class="input-field col s6">
-        <input id="name_of_dish" name="name_of_dish" type="text" class="validate">
+        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" required>
         <label for="last_name">Name of the Dish</label>
     </div>
     <div class="input-field col s6">
@@ -26,12 +26,21 @@
         </select>
         <label>Cuisine</label>
     </div>
+    <div class="input-field col s6">
+        <select id="cooking_time" name="cooking_time">
+          <option value="" disabled selected>Cooking Time</option>
+          {% for cooking_time in cooking_times %}
+          <option value="{{cooking_time}}">{{cooking_time}}</option>
+          {% endfor %}
+        </select>
+        <label>Cooking Time</label>
+    </div>
     <div class="input-field col s12">
-        <textarea id="ingredients" name="ingredients" class="materialize-textarea"></textarea>
+        <textarea id="ingredients" name="ingredients" class="materialize-textarea" required></textarea>
         <label for="textarea1">Ingredients</label>
     </div>
     <div class="input-field col s12">
-        <textarea id="method" name="method" class="materialize-textarea"></textarea>
+        <textarea id="method" name="method" class="materialize-textarea" required></textarea>
         <label for="textarea1">Method</label>
     </div>
     <div class="switch">
@@ -63,7 +72,7 @@
         </label>
     </div>
     <div class="input-field col s6">
-        <input id="image_url" name="image_url" type="text" class="validate">
+        <input id="image_url" name="image_url" type="text" class="validate" required>
         <label for="first_name">Image URL</label>
     </div>
     <!--<div class="file-field input-field">-->

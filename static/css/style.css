@@ -51,6 +51,12 @@
     color: #4b4444;
 }
 
+.thumbs-up i.select-t-u {
+    vertical-align: text-bottom;
+    color: #26a69a;
+    font-size: 30px;
+}
+
 /*.thumbs-up i::before {*/
 /*    vertical-align: text-bottom;*/
 /*    color: #4b4444;*/

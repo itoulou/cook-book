@@ -7,7 +7,7 @@
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6 ">
-        <h4>{{ recipe_selected.name_of_dish }} by {{ recipe_selected.username }}</h4>
+        <h4>{{ recipe_selected.name_of_dish }} by {{ username }}</h4>
     </div>
 </div>
 <div class="row">
@@ -22,6 +22,11 @@
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6 ">
+        <p>{{ recipe_selected.cooking_time }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 col offset-m3 col m6 ">
         <p>{{ recipe_selected.ingredients }}</p>
     </div>
 </div>
@@ -32,34 +37,43 @@
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6 ">
+        <p>Contain nuts?</p>
         <p>{{ recipe_selected.contain_nuts }}</p>
     </div>
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6 ">
+        <p>Contain gluten?</p>
         <p>{{ recipe_selected.contain_gluten }}</p>
     </div>
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6">
+        <p>Contain lactose?</p>
         <p>{{ recipe_selected.contain_lactose }}</p>
     </div>
 </div>
 <div class="row">
     <div class="col s12 col offset-m3 col m6">
+        <p>batch cook?</p>
         <p>{{ recipe_selected.batch_cook }}</p>
     </div>
 </div>
 <div class="row">
-    <div class="thumbs-up col s12 col offset-m3 col m6">
-        <p>Give this dish a thumbs up -</p>
-        <button class="thumbs-up-button"><i class="material-icons prefix thumb-up">thumb_up</i></button>
-    </div>
+    <form action="{{url_for('num_thumb_up', recipe_id=recipe_selected._id)}}" method='POST'>
+        <div class="thumbs-up col s12 col offset-m3 col m6">
+            <p>Give this dish a thumbs up -</p>
+            <button class="thumbs-up-button"><i class="material-icons prefix thumb-up">thumb_up</i></button>
+        </div>
+    </form>
 </div>
 <div class="row">
     <div class="col s6 col offset-m3 col m6">
         <a href="{{ url_for('to_edit_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small">Edit Recipe</a>
-        <a href="{{ url_for('delete_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small blue">Delete Recipe</a>
+        <a href="{{ url_for('delete_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small blue delete_recipe">Delete Recipe</a>
+    </div>
+    <div class="col s6 col offset-m3 col m6">
+        <a href="{{ url_for('all_recipes') }}" class="waves-effect waves-light btn btn_small blue">Back</a>
     </div>
 </div>
 

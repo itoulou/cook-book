@@ -1,18 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method='POST'>
     <div class="input-field col s6">
-        <input id="username" name="username" type="text" class="validate" value="{{recipe.username}}">
+        <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>
         <label for="first_name">Username</label>
     </div>
     <div class="input-field col s6">
-        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" value="{{recipe.name_of_dish}}">
+        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" value="{{recipe.name_of_dish}}" required>
         <label for="last_name">Name of the Dish</label>
     </div>
     <div class="input-field col s6">
         <select id="serves" name="serves">
           <option value="" disabled selected>How many does it serve?</option>
           {% for number in serves %}
-          <option value="{{number}}" selected>{{number}}</option>
+              {% if number == recipe.serves %}
+              <option value="{{number}}" selected>{{number}}</option>
+              {% else %}
+              <option value="{{number}}" >{{number}}</option>
+              {% endif %}
           {% endfor %}
         </select>
         <label>Serves</label>
@@ -21,17 +25,34 @@
         <select id="cuisine" name="cuisine">
           <option value="" disabled selected>Choose Cuisine</option>
           {% for cuisine in cuisine %}
-          <option value="{{cuisine}}" selected>{{cuisine}}</option>
+              {% if cuisine == recipe.cuisine %}
+                  <option value="{{cuisine}}" selected>{{cuisine}}</option>
+                  {% else %}
+                  <option value="{{cuisine}}" >{{cuisine}}</option>
+              {% endif %}
           {% endfor %}
         </select>
         <label>Cuisine</label>
     </div>
+    <div class="input-field col s6">
+        <select id="cooking_time" name="cooking_time">
+          <option value="" disabled selected>Cooking Time</option>
+          {% for cooking_time in cooking_times %}
+              {% if cooking_time == recipe.cooking_time %}
+                  <option value="{{cooking_time}}" selected>{{cooking_time}}</option>
+                  {% else %}
+                  <option value="{{cooking_time}}" >{{cooking_time}}</option>
+              {% endif %}
+          {% endfor %}
+        </select>
+        <label>Cooking Time</label>
+    </div>
     <div class="input-field col s12">
-        <textarea id="ingredients" name="ingredients" class="materialize-textarea">{{recipe.ingredients}}</textarea>
+        <textarea id="ingredients" name="ingredients" class="materialize-textarea" required>{{recipe.ingredients}}</textarea>
         <label for="textarea1">Ingredients</label>
     </div>
     <div class="input-field col s12">
-        <textarea id="method" name="method" class="materialize-textarea">{{recipe.method}}</textarea>
+        <textarea id="method" name="method" class="materialize-textarea" required>{{recipe.method}}</textarea>
         <label for="textarea1">Method</label>
     </div>
     <div class="switch">
@@ -79,7 +100,7 @@
         </label>
     </div>
     <div class="input-field col s6">
-        <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}">
+        <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}" required>
         <label for="first_name">Image URL</label>
     </div>
     <div>
