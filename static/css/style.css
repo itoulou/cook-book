@@ -41,7 +41,7 @@
 .thumbs-up p{
     display: inline;
 }
-.thumbs-up button {
+.thumbs-up a {
     background-color: #fff;
     border: none;
 }

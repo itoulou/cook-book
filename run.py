@@ -1,6 +1,7 @@
 import os
 import operator
 import json
+import pymongo
 from functools import wraps
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
@@ -92,25 +93,25 @@ def sanitize_form_dictionary(recipe_dict):
         if recipe_dict['contain_gluten']=='on':
             recipe_dict['contain_gluten']=True
     except:
-        recipe_dict['contain_gluten']=False
+        recipe_dict['contain_gluten']=None
 
     try:
         if recipe_dict['contain_lactose']=='on':
            recipe_dict['contain_lactose']=True
     except:
-        recipe_dict['contain_lactose']=False
+       recipe_dict['contain_lactose']=None
         
     try:
         if recipe_dict['contain_nuts']=='on':
            recipe_dict['contain_nuts']=True
     except:
-        recipe_dict['contain_nuts']=False    
+        recipe_dict['contain_nuts']=None    
 
     try:
         if recipe_dict['batch_cook']=='on':
            recipe_dict['batch_cook']=True
     except:
-        recipe_dict['batch_cook']=False
+        recipe_dict['batch_cook']=None
         
     return recipe_dict
 
@@ -118,19 +119,17 @@ def sanitize_form_dictionary(recipe_dict):
 
 @app.route('/all_recipes')
 def all_recipes():
-    user = mongo.db.users.find()
     all_recipes = mongo.db.recipes.find()
-    return render_template('findrecipe.html', recipes=all_recipes, user=user)
+    return render_template('findrecipe.html', recipes=all_recipes)
 
 @app.route('/view_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     session_username = session_user()
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    
     username = compare_user(recipe_id)
-
     return render_template('viewrecipe.html', recipe_selected=recipe_selected,
-                                              username=username)
+                                              username=username,
+                                              session_username=session_username)
     
 
 
@@ -156,7 +155,7 @@ def update_recipe(recipe_id):
     recipes = mongo.db.recipes
     
     recipes.update( {"_id": ObjectId(recipe_id)}, sanitize_form_dictionary({
-       "username": request.form.get('username'),
+        "username": request.form.get('username'),
         "name_of_dish": request.form.get('name_of_dish'),
         "serves": request.form.get('serves'),
         "cuisine": request.form.get('cuisine'),
@@ -169,34 +168,50 @@ def update_recipe(recipe_id):
         "batch_cook": request.form.get('batch_cook'),
         "image_url": request.form.get('image_url')
     }))
+    
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected)
+    username = recipe_selected['username']
+    session_username = session_user()
+    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+                                              username=username,
+                                              session_username=session_username)
     
 @app.route('/num_thumb_up/<recipe_id>', methods=["POST"])
 def num_thumb_up(recipe_id):
     recipes = mongo.db.recipes
     recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": 1}})
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected)
-    
+    username = recipe_selected['username']
+    session_username = session_user()
+    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+                                              username=username,
+                                              session_username=session_username)
+
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('all_recipes'))
 
+@app.route('/most_popular')
+def sort_most_popular():
+    most_popular = mongo.db.recipes.find().sort('number_of_likes', pymongo.DESCENDING)
+    return render_template('mostpopular.html', most_popular=most_popular)
+    
+
 @app.route('/gluten_free')
 def sort_gluten_free():
-    gluten_free_recipes = mongo.db.recipes.find({'contain_gluten': False})
+    recipes = mongo.db.recipes
+    gluten_free_recipes = recipes.find({'contain_gluten': None}) 
     return render_template('glutenfree.html', gf=gluten_free_recipes)
     
 @app.route('/nut_free')
 def sort_nut_free():
-    nut_free_recipes = mongo.db.recipes.find({'contain_nuts': False})
+    nut_free_recipes = mongo.db.recipes.find({'contain_nuts': None})
     return render_template('nutfree.html', nf=nut_free_recipes)    
     
 @app.route('/lactose_free')
 def sort_lactose_free():
-    lactose_free_recipes = mongo.db.recipes.find({'contain_lactose': False})
+    lactose_free_recipes = mongo.db.recipes.find({'contain_lactose': None})
     return render_template('lactosefree.html', lf=lactose_free_recipes)
 
 @app.route('/batch_cook')

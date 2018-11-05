@@ -60,7 +60,7 @@
     </div>
 </div>
 <div class="row">
-    <form action="{{url_for('num_thumb_up', recipe_id=recipe_selected._id)}}" method='POST'>
+    <form id="thumb_up_form" action="{{url_for('num_thumb_up', recipe_id=recipe_selected._id)}}" method='POST'>
         <div class="thumbs-up col s12 col offset-m3 col m6">
             <p>Give this dish a thumbs up -</p>
             <button class="thumbs-up-button"><i class="material-icons prefix thumb-up">thumb_up</i></button>
@@ -68,10 +68,12 @@
     </form>
 </div>
 <div class="row">
+    {% if username == session_username %}
     <div class="col s6 col offset-m3 col m6">
         <a href="{{ url_for('to_edit_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small">Edit Recipe</a>
-        <a href="{{ url_for('delete_recipe', recipe_id=recipe_selected._id) }}" class="waves-effect waves-light btn btn_small blue delete_recipe">Delete Recipe</a>
+        <a href="{{ url_for('delete_recipe', recipe_id=recipe_selected._id) }}" id="delete_recipe" class="waves-effect waves-light btn btn_small blue delete_recipe">Delete Recipe</a>
     </div>
+    {% endif %}
     <div class="col s6 col offset-m3 col m6">
         <a href="{{ url_for('all_recipes') }}" class="waves-effect waves-light btn btn_small blue">Back</a>
     </div>

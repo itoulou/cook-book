@@ -7,7 +7,7 @@
     </button>
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="{{ url_for('all_recipes') }}">All Recipes</a></li>
-        <li><a href="#!">Most Popular</a></li>
+        <li><a href="{{ url_for('sort_most_popular') }}">Most Popular</a></li>
         <li><a href="{{ url_for('sort_gluten_free') }}">Gluten Free</a></li>
         <li><a href="{{ url_for('sort_nut_free') }}">Nut Free</a></li>
         <li><a href="{{ url_for('sort_lactose_free') }}">Lactose Free</a></li>
