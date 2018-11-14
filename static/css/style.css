@@ -1,5 +1,49 @@
+@font-face{
+    
+    font-family: bite-chocolate;
+    src: url('/static/css/fonts/billy-argel_bite-chocolate/Bite Chocolate Personal Use.ttf')
+}
 
-/*------------------------------find recipe page*/
+@font-face{
+    font-family: panforte;
+    src: url('/static/css/fonts/zetafonts_panforte/Panforte Pro Regular.ttf')
+}
+
+body{
+    font-family: panforte;
+}
+/*-------------------------------------login and register*/
+.container-login{
+    background-image: url(https://d39l2hkdp2esp1.cloudfront.net/img/photo/126844/126844_00_2x.jpg?20170622031731);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin-top: -3%;
+}
+.login-title h1{
+    color: red;
+}
+
+/* -----------------------------------base.html */
+.username{
+    color:green;
+}
+.brand-logo{
+    font-family: bite-chocolate;
+    font-size: 1.8rem !important;
+}
+nav .brand-logo {
+    padding-left: 15px;
+}
+nav{
+    background-color: #576783;
+}
+
+nav ul a {
+    font-size: 1.5rem;
+}
+
+/*------------------------------all recipes page*/
 .side-nav-container{
     height: 100%;
     z-index: 1;
@@ -41,7 +85,7 @@
 .thumbs-up p{
     display: inline;
 }
-.thumbs-up a {
+.thumbs-up button {
     background-color: #fff;
     border: none;
 }

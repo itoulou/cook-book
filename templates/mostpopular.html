@@ -13,26 +13,12 @@
         <li><a href="{{ url_for('sort_lactose_free') }}">Lactose Free</a></li>
         <li><a href="{{ url_for('sort_batch_cook') }}">Meals for Batch Cooking</a></li>
     </ul>
-    <!--<ul class="side-nav-comp" id="">-->
-    <!--    <li><a href="">Most Popular</a></li>-->
-    <!--    <li><a href="">Gluten Free</a></li>-->
-    <!--    <li><a href="">Nut Free</a></li>-->
-    <!--    <li><a href="">Lactose Free</a></li>-->
-    <!--    <li><a href="">Meals for Batch Cooking</a></li>-->
-    <!--</ul>-->
 </div>
 <div class="row">
     <div class="col s12 center-align">
         <h1>Most Popular</h1>
     </div>
 </div>
-<!--<div>-->
-<!--    Most Popular-->
-<!--    Gluten Free-->
-<!--    Nut Free-->
-<!--    Lactose Free-->
-<!--    Meals for Batch Cooking-->
-<!--</div>-->
 <div class="row">
     {% for recipe in most_popular %}
     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
@@ -43,11 +29,26 @@
                 </div>
                 <div class="card-content">
                     <p>{{ recipe.name_of_dish }}</p>
+                    <p>{{ recipe.username }}</p>
+                    <p>{{ recipe.number_of_likes }}</p>
                 </div>
             </div>
         </div>
     </a>
     {% endfor %}
+    <ul class="pagination">
+        {% if offset > 0 %}
+        <li class=""><a href="{{previous_url}}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+        <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+        {% endif %}
+        <li>{{page_count}}/{{recipe_count}}</li>
+        {% if offset + limit >= recipe_count or page_count <= limit %}
+        <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+        <li class=""><a href="{{next_url}}"><i class="material-icons">chevron_right</i></a></li>
+        {% endif %}    
+    </ul>
 </div>
 
 

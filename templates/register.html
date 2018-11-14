@@ -11,15 +11,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to the Pantry</h1>
-    <p>Please enter a username and a password</p>
-    <form action="{{ url_for('register') }}" method="POST">
-        <label>username</label>
-        <input id="username" name="username" type="text" class="validate" required>
-        <label>password</label>
-        <input id="username" name="password" type="password" class="validate" required>
-        <p id="incorrect_login">{{incorrect_login}}</p>
-        <button>Register</button>
-    </form>
+    <div class="container-login">
+        <div class="login-title center-align">
+            <h1>Welcome to the Pantry</h1>
+            <p>Please enter your username and password</p>
+        </div>
+        <div class="form-login center-align">
+            <form action="{{ url_for('register') }}" method="POST">
+                <label>username</label>
+                <input id="username" name="username" type="text" class="validate" required>
+                <label>password</label>
+                <input id="username" name="password" type="password" class="validate" required>
+                <p id="incorrect_login">{{incorrect_login}}</p>
+                <button>Register</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

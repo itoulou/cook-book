@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Welcome to the Pantry</h1>
-    <p>Please enter your username and password</p>
-    <form action="{{ url_for('login') }}" method="POST">
-        <label>username</label>
-        <input id="username" name="username" type="text" class="validate" required>
-        <label>password</label>
-        <input id="username" name="password" type="password" class="validate" required>
-        <p id="incorrect_login">{{incorrect_login}}</p>
-        <button>Submit</button>
-    </form>
-    <p>Not registered yet? <a href="{{url_for('register')}}">Sign up</a> here</p>
-    
-    
+    <div class="container-login">
+        <div class="col s12 login-title center-align">
+            <h1>Welcome to the Pantry</h1>
+            <p>Please enter your username and password</p>
+        </div>
+        <div class="col s12 form-login center-align">
+            <form action="{{ url_for('login') }}" method="POST">
+                <label>username</label>
+                <input id="username" name="username" type="text" class="validate" required>
+                <label>password</label>
+                <input id="username" name="password" type="password" class="validate" required>
+                <p id="incorrect_login">{{incorrect_login}}</p>
+                <button>Login</button>
+            </form>
+        </div>
+        <div class="col s12 center-align sign-up">
+            <p>Not registered yet? <a href="{{url_for('register')}}">Sign up</a> here</p>
+        </div>
+    </div>
+
 </body>
+
 </html>

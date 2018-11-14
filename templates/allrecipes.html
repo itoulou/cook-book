@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="side-nav-container">
-    <h6>Looking for something imparticular?</h6>
+    <h6>Looking for something in particular?</h6>
     <button class="btn waves-effect waves-light filter-button dropdown-button" href="#!" data-activates="dropdown1" type="submit">Filter
         <i class="material-icons right">filter_list</i>
     </button>
@@ -13,26 +13,12 @@
         <li><a href="{{ url_for('sort_lactose_free') }}">Lactose Free</a></li>
         <li><a href="{{ url_for('sort_batch_cook') }}">Meals for Batch Cooking</a></li>
     </ul>
-    <!--<ul class="side-nav-comp" id="">-->
-    <!--    <li><a href="">Most Popular</a></li>-->
-    <!--    <li><a href="">Gluten Free</a></li>-->
-    <!--    <li><a href="">Nut Free</a></li>-->
-    <!--    <li><a href="">Lactose Free</a></li>-->
-    <!--    <li><a href="">Meals for Batch Cooking</a></li>-->
-    <!--</ul>-->
 </div>
 <div class="row">
     <div class="col s12 center-align">
         <h1>All Recipes</h1>
     </div>
 </div>
-<!--<div>-->
-<!--    Most Popular-->
-<!--    Gluten Free-->
-<!--    Nut Free-->
-<!--    Lactose Free-->
-<!--    Meals for Batch Cooking-->
-<!--</div>-->
 <div class="row">
     {% for recipe in recipes %}
     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
@@ -50,10 +36,17 @@
     </a>
     {% endfor %}
     <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class=""><a href="#!">2</a></li>
-        <li class=""><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        {% if offset > 0 %}
+        <li class=""><a href="{{previous_url}}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+        <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+        {% endif %}
+        <li>{{page_count}}/{{recipe_count}}</li>
+        {% if offset + limit >= recipe_count or page_count <= limit %}
+        <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+        <li class=""><a href="{{next_url}}"><i class="material-icons">chevron_right</i></a></li>
+        {% endif %}    
     </ul>
 </div>
 

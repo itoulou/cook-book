@@ -34,7 +34,7 @@
 <!--    Meals for Batch Cooking-->
 <!--</div>-->
 <div class="row">
-    {% for recipe in batch_cooks %}
+    {% for recipe in recipes %}
     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <div class="card-image col s6 col m6 col l4 center-align">
             <div class="card recipe-images-div">
@@ -43,11 +43,25 @@
                 </div>
                 <div class="card-content">
                     <p>{{ recipe.name_of_dish }}</p>
+                    <p>{{ recipe.batch_cook }}</p>
                 </div>
             </div>
         </div>
     </a>
     {% endfor %}
+    <ul class="pagination">
+        {% if offset > 0 %}
+        <li class=""><a href="{{previous_url}}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+        <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+        {% endif %}
+        <li>{{page_count}}/{{recipe_count}}</li>
+        {% if offset + limit >= recipe_count or page_count <= limit %}
+        <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+        <li class=""><a href="{{next_url}}"><i class="material-icons">chevron_right</i></a></li>
+        {% endif %}    
+    </ul>
 </div>
 
 
