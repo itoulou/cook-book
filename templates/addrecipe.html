@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<form action="{{ url_for('insert_recipe') }}" method='POST'>
+<form action="{{ url_for('insert_recipe') }}" method='POST' class="add-edit-form">
     <div class="input-field col s6">
         <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>
         <label for="first_name">Username</label>
@@ -9,7 +9,7 @@
         <label for="last_name">Name of the Dish</label>
     </div>
     <div class="input-field col s6">
-        <select id="serves" name="serves">
+        <select id="serves" name="serves" required>
           <option value="" disabled selected>How many does it serve?</option>
           {% for number in serves %}
           <option value="{{number}}">{{number}}</option>
@@ -18,7 +18,7 @@
         <label>Serves</label>
     </div>
     <div class="input-field col s6">
-        <select id="cuisine" name="cuisine">
+        <select id="cuisine" name="cuisine" required>
           <option value="" disabled selected>Choose Cuisine</option>
           {% for cuisine in cuisine %}
           <option value="{{cuisine}}">{{cuisine}}</option>
@@ -27,7 +27,7 @@
         <label>Cuisine</label>
     </div>
     <div class="input-field col s6">
-        <select id="cooking_time" name="cooking_time">
+        <select id="cooking_time" name="cooking_time" required>
           <option value="" disabled selected>Cooking Time</option>
           {% for cooking_time in cooking_times %}
           <option value="{{cooking_time}}">{{cooking_time}}</option>
@@ -41,7 +41,7 @@
     </div>
     <div class="input-field col s12">
         <textarea id="method" name="method" class="materialize-textarea" required></textarea>
-        <label for="textarea1">Method</label>
+        <label for="textarea1">Cooking Instructions</label>
     </div>
     <div class="switch">
         <label>
@@ -75,17 +75,8 @@
         <input id="image_url" name="image_url" type="text" class="validate" required>
         <label for="first_name">Image URL</label>
     </div>
-    <!--<div class="file-field input-field">-->
-    <!--    <div class="btn">-->
-    <!--        <span>Upload a photo</span>-->
-    <!--        <input type="file">-->
-    <!--    </div>-->
-    <!--    <div class="file-path-wrapper">-->
-    <!--        <input class="file-path validate" type="text">-->
-    <!--    </div>-->
-    <!--</div>-->
     <div>
-        <button class="btn waves-effect waves-light" type="submit">Add Recipe
+        <button class="btn waves-effect waves-light add-edit-button" type="submit">Add Recipe
             <i class="material-icons right">playlist_add</i>
         </button>
     </div>

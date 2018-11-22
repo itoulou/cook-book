@@ -1,20 +1,32 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col s12 center-align">
-            <h1>The Pantry</h1>
-        </div>
+<div class="row">
+    <div class="col l12 index-title center-align hide-on-med-and-down welcome">
+        <p>Welcome {{username}} to</p>
     </div>
-    <div class="row">
-        <div class="card-image col s12 col m3 col offset-m3 center-align">
-            <a href="{{ url_for('all_recipes') }}"><img src="images/sample-1.jpg"><span class="card-title">Find a recipe</span></a>
-        </div>
-        <div class="card-image col s12 col m3 center-align">
-            <a href="{{ url_for('to_add_recipe_page') }}"><img src="images/sample-1.jpg"><span class="card-title">Add recipe</span></a>
-        </div>
+    <div class="col s12 index-title center-align">
+        <h1>The Pantry.</h1>
     </div>
 </div>
-<div>
-    <div id="trial-chart"></div>
+<div class="row search-add-recipe">
+    <div class="col m12 l3 offset-m3 center-align index-card">
+        <a href="{{ url_for('all_recipes') }}">
+            <div class="index-image find-image">
+                <div class="index-image-opacity">
+                    <span class="card-title">Find a recipe</span>
+                    <i class="medium material-icons">search</i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col m12 l3 center-align index-card">
+        <a href="{{ url_for('to_add_recipe_page') }}">
+            <div class="index-image add-image">
+                <div class="index-image-opacity">
+                    <span class="card-title">Add recipe</span>
+                    <i class="medium material-icons">playlist_add</i>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 {% endblock %}

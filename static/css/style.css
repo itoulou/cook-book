@@ -1,41 +1,158 @@
-@font-face{
-    
+@font-face {
+
     font-family: bite-chocolate;
     src: url('/static/css/fonts/billy-argel_bite-chocolate/Bite Chocolate Personal Use.ttf')
 }
 
-@font-face{
+@font-face {
     font-family: panforte;
     src: url('/static/css/fonts/zetafonts_panforte/Panforte Pro Regular.ttf')
 }
 
-body{
-    font-family: panforte;
-}
-/*-------------------------------------login and register*/
-.container-login{
-    background-image: url(https://d39l2hkdp2esp1.cloudfront.net/img/photo/126844/126844_00_2x.jpg?20170622031731);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    margin-top: -3%;
-}
-.login-title h1{
-    color: red;
+@font-face {
+    font-family: helvetica-bold;
+    src: url('/static/css/fonts/helvetica-2-cufonfonts/Helvetica-Bold.ttf')
 }
 
-/* -----------------------------------base.html */
-.username{
-    color:green;
+html {
+    height: 100%;
 }
-.brand-logo{
+
+body {
+    font-family: panforte;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.pantry-font {
+    font-family: bite-chocolate;
+    font-size: 100%;
+    position: relative;
+    margin: 10px;
+}
+
+.welcome {
+    color: #fafafa;
+    margin-bottom: 0 !important;
+}
+
+.welcome p {
+    font-size: 25px;
+}
+
+/*-------------------------------------login.html and register.html*/
+
+@media(max-width: 1023px) {
+    .container-login {
+        min-height: 100%;
+        background-image: url('https://d39l2hkdp2esp1.cloudfront.net/img/photo/126844/126844_00_2x.jpg?20170622031731');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+
+.container-form {
+    height: 100vh !important;
+    padding: 30% 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.login-title h1 {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    color: #e1e1e1;
+}
+
+.login-title p {
+    font-size: 18px;
+    color: #e1e1e1;
+
+}
+
+.form-login {}
+
+.form-login label {
+    font-size: 20px;
+}
+
+.form-login label:focus {
+    font-size: 20px;
+    color: #576783;
+}
+
+.form-login input {
+    margin-right: 10% !important;
+    margin-left: 10% !important;
+    height: 20% !important;
+    max-width: 75%;
+    color: #e1e1e1;
+    font-size: 20px !important;
+    letter-spacing: 1px;
+}
+
+.form-login input:focus {
+    border-bottom: 1px solid #576783 !important;
+    box-shadow: 0 1px 0 0 #576783 !important;
+}
+
+.form-login input[type=text]:not(.browser-default):focus:not([read-only])+label {
+    color: #576783 !important;
+}
+
+.form-login button {
+    color: #fff;
+    background-color: #576783;
+    border: none;
+    border-radius: 5px;
+    padding: 1% 15%;
+}
+
+.form-login button:focus {
+    color: #fff;
+    background-color: #394356;
+    border: none;
+    border-radius: 5px;
+    padding: 1% 15%;
+}
+
+.form-login p {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: #e1e1e1;
+}
+
+.form-login a {
+    color: #576783;
+}
+
+#incorrect_login {
+    color: #ed6826;
+    font-size: 20px;
+}
+
+/*-----------------------------------base.html */
+
+.username {
+    color: green;
+}
+
+.brand-logo {
     font-family: bite-chocolate;
     font-size: 1.8rem !important;
 }
+
 nav .brand-logo {
     padding-left: 15px;
 }
-nav{
+
+nav {
+    margin-bottom: 15%;
     background-color: #576783;
 }
 
@@ -43,70 +160,710 @@ nav ul a {
     font-size: 1.5rem;
 }
 
-/*------------------------------all recipes page*/
-.side-nav-container{
-    height: 100%;
-    z-index: 1;
-    position: absolute;
-    left: 0px;
-    width: 15%;
+.side-nav {
+    background-color: #576783;
 }
-.filter-button{
+
+.side-nav li {
+    text-align: center;
+    padding-top: 55px;
+    border-bottom: 2px solid;
+}
+
+.side-nav li:focus {
+    background-color: #394356;
+}
+
+.side-nav li:last-child {
+    border-bottom: none;
+}
+
+.side-nav li a {
+    color: #fff;
+    font-size: 35px;
+    letter-spacing: 1px;
+    padding-bottom: 100px;
+}
+
+nav .nav-wrapper i,
+nav a.button-collapse i {
+    font-size: 40px;
+}
+
+.container-base {
+    min-width: 100%;
+    background-color: #3c3c3d;
+    height: 100%;
+}
+
+.container {
+    margin-top: 2%;
+}
+
+.page-footer {
+    margin-top: 1%;
+    padding-bottom: 7%;
+    background: #576783;
+    padding-top: 5px;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-copyright {
+    position: relative;
+    top: 60px;
+    margin-top: 3%;
+}
+
+.white-text {
+    font-size: 30px;
+}
+
+.social-links li {
+    display: inline;
+}
+
+.social-links i {
+    font-size: 40px;
+    margin: 0 3% 0 3%;
+}
+
+/*-------------------------------index.html*/
+
+.index-title {
+    margin: 5% 0 10% 0;
+}
+
+.index-title h1 {
+    font-size: 100px;
+    font-family: bite-chocolate;
+    margin: 0;
+    color: #fafafa;
+}
+
+.search-add-recipe {
+    width: 100%;
+    margin: 0!important;
+}
+
+.index-card {
+    margin: 1% 0 1% 0!important;
+    height: 400px;
+    width: 100%;
+    padding: 0!important;
+
+}
+
+.index-image {
+    height: 100%;
     width: 100%;
 }
 
-.side-nav-comp li{
-    padding: 10px 5px;
-    
+.find-image {
+    background-image: url('/static/images/Screen-Shot-2017-06-04-at-9.30.44-PM.png');
+    background-size: cover;
+    background-position: center;
+
 }
 
-.recipe-images-div{
+.add-image {
+    background-image: url('/static/images/e2bd16a6e19bf30e6287245b50cdf8aa.jpg');
+    background-size: cover;
+    background-position: center;
+
+}
+
+.index-image-opacity {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.17);
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.index-card span {
+    font-size: 50px;
+    z-index: 1;
+    position: relative;
+    top: 170px;
+    color: #fafafa;
+}
+
+.index-card i {
+    display: block;
+    color: #fafafa;
+    position: relative;
+    top: 45%;
+}
+
+.index-card-image img {
+    border: 1px solid #000;
+    height: 100%;
+    width: 100%;
+}
+
+/*------------------------------addrecipe.html*/
+
+.add-edit-form {
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom: 45%;
+    margin-top: 10%;
+}
+
+.add-edit-form input {
+    color: #fafafa;
+    letter-spacing: .7px;
+    font-size: 40px !important;
+    margin: 3% 0 4% 0 !important;
+
+}
+
+.add-edit-form textarea {
+    color: #fafafa;
+    letter-spacing: .7px;
+    font-size: 25px !important;
+    margin: 3% 0 4% 0 !important;
+
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: #576783;
+    box-shadow: 0 1px 0 0 #576783;
+}
+
+.add-edit-form label {
+    font-size: 25px;
+    letter-spacing: .5px;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+    color: #576783;
+}
+
+.select-wrapper {
+    margin: 9% 0 6% 0;
+    width: 65%;
+}
+
+.select-wrapper+label {
+    position: absolute;
+    top: -50px;
+}
+
+.select-wrapper span.caret {
+    color: #fafafa !important;
+    bottom: 5rem;
+}
+
+.dropdown-content {
+    background-color: #576783;
+}
+
+.dropdown-content li>span {
+    color: #fafafa;
+    font-size: 25px;
+}
+
+.select-dropdown li.disabled>span {
+    color: #fafafa;
+}
+
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #576783;
+    -webkit-box-shadow: 0 1px 0 0 #576783;
+    box-shadow: 0 1px 0 0 #576783;
+}
+
+textarea.materialize-textarea:focus:not([readonly])+label {
+    color: #576783;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #576783;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #fafafa;
+}
+
+.add-edit-button {
+    font-size: 40px;
+    padding-top: 4%;
+    padding-bottom: 9%;
+    background: #576783;
+    margin-top: 15px;
+
+}
+
+.add-edit-button i {
+    font-size: 40px;
+}
+
+/*------------------------------all recipes pages*/
+
+.side-nav-row {
+    position: relative;
+    bottom: 9rem;
+}
+
+.side-nav-container {
+    width: 60%;
+    padding-bottom: 2%;
+}
+
+.side-nav-container h6 {
+    color: #fafafa;
+    letter-spacing: 1px;
+    font-size: 30px;
+}
+
+.filter-button {
+    width: 35%;
+    background-color: #576783;
+    font-size: 35px;
+    letter-spacing: 1px;
+    padding: 2% 5%;
+    height: 2%;
+}
+
+.filter-button:focus {
+    background-color: #576783;
+}
+
+.filter-button:hover {
+    background-color: #576783;
+}
+
+.filter-button i {
+    font-size: 25px;
+}
+
+.dropdown-recipes {
+    width: 98% !important;
+}
+
+.dropdown-recipes li {
+    display: inline-block;
+    padding: 3%;
+    width: auto;
+}
+
+.dropdown-recipes li a {
+    color: #fafafa;
+    font-size: 40px;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+.dropdown-recipes li:hover{
+    background-color: #576783;
+}
+.dropdown-recipes a:hover{
+    color: #dadada;
+}
+
+.side-nav-comp li {
+    padding: 10px 5px;
+
+}
+
+.recipe-images-div {
     max-width: 350px;
     overflow: hidden;
 }
 
 .recipe-images {
-    height: 200px;
+    height: 250px;
     width: 200px;
 }
 
+.recipes-header h1 {
+    color: #fafafa;
+    margin-top: -12%;
+}
+
+.recipe-images-div {
+    max-width: 100%;
+}
+
+.card-content {
+    background: #576783;
+}
+
+.card-content p {
+    color: #fafafa !important;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.pagination li {
+    font-size: 50px;
+    color: #fafafa;
+}
+
+.pagination i {
+    font-size: 50px !important;
+    color: #fafafa;
+    vertical-align: bottom;
+}
+
+.pagination .disabled i {
+    color: #5f5a5a;
+}
 
 /*------------------------------view recipe page*/
-.view-recipe-imgdiv{
+
+.container-view {
+    background: #3c3c3d;
+    position: relative;
+    bottom: 6rem;
+}
+
+.view-header h2 {
+    color: #fafafa;
+    font-size: 50px;
+    margin-top: 4%;
+}
+
+.view-header h2 span {
+    color: #fafafa;
+    font-size: 90px;
+    margin: 0 1%;
+
+}
+
+
+.view-recipe-imgdiv {
     height: 400px;
-    max-width: 600px;
+    max-width: 100%;
     overflow: hidden;
+    margin: 5% 0;
+
 }
 
-.view-recipe-image{
-    height: 400px;
+.view-selected-row {
+    margin-bottom: 10%;
 }
 
-.thumbs-up p{
+.view-selected {
+    text-align: center;
+    color: #fafafa;
+}
+
+.view-selected h5 {
+    letter-spacing: 3px;
     display: inline;
+    font-size: 28px;
 }
+
+.view-selected i {
+    padding-left: 5%;
+    font-size: 35px;
+    vertical-align: bottom;
+}
+
+.view-recipe-image {
+    height: 400px;
+    width: 100%;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    border-radius: 5%;
+}
+
+.view-ing-meth h5 {
+    margin-left: 3%;
+    font-size: 3rem;
+}
+
+.view-ing-meth {
+    color: #fafafa;
+}
+
+.view-ing-meth pre {
+    font-family: panforte;
+    white-space: pre-wrap;
+    color: #fafafa;
+    padding-left: 15%;
+    padding-right: 1%;
+    font-size: 30px;
+}
+
+.view-ingreds p {
+    font-size: 3rem;
+}
+
+.view-method p {
+    font-size: 32px;
+}
+
+.view-allergens-row {
+    color: #fafafa;
+}
+
+.view-allergens-row h5 {
+    color: #fafafa;
+    margin-left: 3%;
+    font-size: 3rem;
+}
+
+.warning {
+    color: #c13535;
+}
+
+.free-from {
+    color: #81fd81;
+}
+
+.thumbs-up {
+    margin-top: 5%;
+}
+
+.thumbs-up h5 {
+    display: inline;
+    margin-left: 3%;
+    font-size: 3rem;
+    color: #fafafa;
+}
+
 .thumbs-up button {
-    background-color: #fff;
+    background-color: #3c3c3d;
     border: none;
 }
 
 .thumbs-up i {
     vertical-align: text-bottom;
-    color: #4b4444;
+    color: #fafafa;
+    font-size: 45px;
 }
 
 .thumbs-up i.select-t-u {
     vertical-align: text-bottom;
     color: #26a69a;
-    font-size: 30px;
 }
 
-/*.thumbs-up i::before {*/
-/*    vertical-align: text-bottom;*/
-/*    color: #4b4444;*/
-/*}*/
+.edit-delete-btn {
+    margin-top: 5%;
+    text-align: center;
+}
 
-/*.thumbs-up i::after {*/
-/*    vertical-align: text-bottom;*/
-/*    color: #26a69a;*/
-/*}*/
+.edit-recipe {
+    background-color: #56a756;
+    margin-right: 2%;
+    font-size: 2rem;
+}
+
+.delete_recipe {
+    background-color: #c13535;
+    margin-left: 2%;
+    font-size: 2rem;
+}
+
+.view-back-btn {
+    margin-top: 5%;
+}
+
+.back-btn {
+    margin-left: 3%;
+    background-color: #576783;
+    font-size: 2rem;
+}
+
+/*---------------------------------------------------------media queries small*/
+
+@media (min-width:415px) and (max-width:767px) {
+    /*-----------------login and register.html*/
+    .container-form {
+        height: 100% !important;
+        padding: 5% 1% 0;
+
+    }
+
+}
+
+/*---------------------------------------------------------media queries medium*/
+
+@media (min-device-width:768px) and (max-width:1023px) {
+    /*-----------------login and register.html*/
+    .container-form {
+        padding: 20% 0;
+        height: 100vh !important;
+
+    }
+    .login-title h1 {
+        font-size: 80px;
+    }
+    .pantry-font {
+        font-size: 100px;
+        margin: 75px 0 80px;
+    }
+    .login-title p {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+    .form-login label {
+        font-size: 30px;
+    }
+    .form-login input {
+        margin-right: 25% !important;
+        margin-left: 25% !important;
+        margin-top: 1%;
+        max-width: 50%;
+        font-size: 25px !important;
+
+    }
+    .form-login button {
+        padding: 1% 10%;
+        font-size: 20px;
+        margin-top: 3%;
+    }
+    .form-login button:focus {
+        padding: 1% 10%;
+    }
+    .form-login p {
+        font-size: 25px;
+    }
+
+    #incorrect_login {
+        font-size: 25px;
+    }
+    /*-----------------index.html*/
+    .container-base {
+        height: 110%;
+    }
+
+    .page-footer {
+        position: relative;
+    }
+    /*-----------------add+editrecipe.html*/
+    .add-edit-form {
+        width: 60%;
+        margin-left: 20%;
+        margin-bottom: 10%;
+        margin-top: -5%;
+    }
+}
+
+/*---------------------------------------------------------media queries large*/
+
+@media (min-width:1024px) {
+    /*-----------------login and register.html*/
+    .container-form {
+        padding: 0;
+    }
+    .welcome-login {
+        height: 100%;
+        padding: 0 !important;
+        background-image: url('https://d39l2hkdp2esp1.cloudfront.net/img/photo/126844/126844_00_2x.jpg?20170622031731');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .login-title h1 {
+        font-size: 80px;
+        padding-top: 300px;
+    }
+    .opacity-welcome-login {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5)
+    }
+    .form-login {
+        padding-top: 300px !important;
+        height: 100%;
+        background-color: #3c3c3d;
+        border-left: 2px solid #576783;
+    }
+    .form-login p {
+        font-size: 20px;
+    }
+    .form-login button:hover {
+        background-color: #394356;
+    }
+    .form-login button:focus {
+        background-color: #394356;
+    }
+    .form-login a:hover {
+        color: #394356;
+    }
+    .form-login a:focus {
+        color: #394356;
+    }
+    /*-----------------base.html*/
+    nav {
+        margin-bottom: 0;
+    }
+    /*-----------------index.html*/
+    .index-title {
+        margin: 2% 0 5% 0;
+    }
+    .index-card {
+        margin: 0 1% 0 1%!important;
+        width: 48% !important;
+    }
+    .index-card span {
+        font-size: 30px;
+    }
+    .index-image-opacity:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .page-footer {
+        position: relative;
+        margin-top: 8%;
+        top: 150px;
+    }
+    .footer-text p {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+    /*-------------------add-editrecipe.html*/
+    .add-edit-form {
+        margin-bottom: 0%;
+    }
+    .add-edit-button:hover {
+        background-color: #394356;
+    }
+    .add-edit-button:focus {
+        background-color: #394356;
+    }
+    /*-----------------all recipes.html(s)*/
+    .side-nav-row {
+        position: relative;
+        bottom: 0;
+    }
+
+    .recipes-header h1 {
+        margin-top: 3%;
+        margin-bottom: 4%;
+    }
+
+    .pagination {
+        position: relative;
+        top: 5rem;
+    }
+    /*------------------viewrecipe.html*/
+    .container-view {
+        margin-top: 12%;
+    }
+    .edit-recipe:hover {
+        background-color: #3b693d;
+    }
+    .edit-recipe:focus {
+        background-color: #3b693d;
+    }
+    .delete_recipe:hover {
+        background-color: #822f29;
+    }
+    .delete_recipe:focus {
+        background-color: #822f29;
+    }
+    .back-btn:hover {
+        background-color: #394356;
+    }
+    .back-btn:focus {
+        background-color: #394356;
+    }
+}

@@ -32,6 +32,7 @@ def compare_user(recipe_id):
 def login():
     users = mongo.db.users
     user = users.find_one({'username': request.form.get('username')})
+    login_username = request.form.get('username')
     login_password = request.form.get('password')
     incorrect_login = 'Username or Password is incorrect'
     if user:
@@ -90,25 +91,25 @@ def insert_recipe():
     
 def sanitize_form_dictionary(recipe_dict):
     try:
-        if recipe_dict['contain_gluten']=='on':
+        if recipe_dict['contain_gluten']=='on' or recipe_dict['contain_gluten']=='true':
             recipe_dict['contain_gluten']=True
     except:
         recipe_dict['contain_gluten']=None
 
     try:
-        if recipe_dict['contain_lactose']=='on':
+        if recipe_dict['contain_lactose']=='on' or recipe_dict['contain_lactose']=='true':
            recipe_dict['contain_lactose']=True
     except:
        recipe_dict['contain_lactose']=None
         
     try:
-        if recipe_dict['contain_nuts']=='on':
+        if recipe_dict['contain_nuts']=='on' or recipe_dict['contain_nuts']=='true':
            recipe_dict['contain_nuts']=True
     except:
         recipe_dict['contain_nuts']=None    
 
     try:
-        if recipe_dict['batch_cook']=='on':
+        if recipe_dict['batch_cook']=='on' or recipe_dict['batch_cook']=='true':
            recipe_dict['batch_cook']=True
     except:
         recipe_dict['batch_cook']=None
@@ -127,16 +128,26 @@ def all_recipes():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
+        
     starting_id = recipes.find().sort('_id', pymongo.ASCENDING)
-    last_id = starting_id[offset]['_id']
-    all_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
-    set_of_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
-    num_recipes = offset
-    for number in set_of_recipes:
-        num_recipes += 1
-    next_url =  '/all_recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    previous_url = '/all_recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    try:
+        last_id = starting_id[offset]['_id']
+        all_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
+        num_recipes = offset
+        for number in set_of_recipes:
+            num_recipes += 1
+        next_url =  '/all_recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
+        previous_url = '/all_recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
+        
+    except:
+        page_count=0
+        recipe_count = 0
+        return render_template('glutenfree.html', offset=offset, limit=limit,
+                                                  recipe_count=recipe_count,
+                                                  page_count=page_count)
+                                                  
     return render_template('allrecipes.html', recipes=all_recipes,
                                               recipe_count=total_recipe_count,
                                               next_url=next_url,
@@ -144,13 +155,16 @@ def all_recipes():
                                               offset=offset,
                                               limit=limit,
                                               page_count=num_recipes)
+                                              
     
 @app.route('/view_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     session_username = session_user()
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = compare_user(recipe_id)
     return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+                                              name_of_dish = name_of_dish_caps,
                                               username=username,
                                               session_username=session_username)
     
@@ -193,9 +207,11 @@ def update_recipe(recipe_id):
     
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     username = recipe_selected['username']
+    name_of_dish_caps = recipe_selected['name_of_dish'].title()
     session_username = session_user()
     return render_template('viewrecipe.html', recipe_selected=recipe_selected,
                                               username=username,
+                                              name_of_dish=name_of_dish_caps,
                                               session_username=session_username)
     
 @app.route('/num_thumb_up/<recipe_id>', methods=["POST"])
@@ -203,10 +219,12 @@ def num_thumb_up(recipe_id):
     recipes = mongo.db.recipes
     recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": 1}})
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = recipe_selected['username']
     session_username = session_user()
     return render_template('viewrecipe.html', recipe_selected=recipe_selected,
                                               username=username,
+                                              name_of_dish=name_of_dish_caps,
                                               session_username=session_username)
 
 @app.route('/delete_recipe/<recipe_id>')
@@ -227,7 +245,7 @@ def sort_most_popular():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
     starting_id = recipes.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
     all_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
@@ -261,16 +279,27 @@ def sort_gluten_free():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
+        
     starting_id = recipes.find({'contain_gluten': None}).sort('_id', pymongo.ASCENDING)
-    last_id = starting_id[offset]['_id']
-    all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_gluten': None}).limit(limit)
-    set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_gluten': None}).limit(limit)
-    num_recipes = offset
-    for number in set_of_recipes:
-        num_recipes += 1
-    next_url =  '/gluten_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    previous_url = '/gluten_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    try:    
+        last_id = starting_id[offset]['_id']
+        all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_gluten': None}).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_gluten': None}).limit(limit)
+        num_recipes = offset
+        for number in set_of_recipes:
+            num_recipes += 1
+        next_url =  '/gluten_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
+        previous_url = '/gluten_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    except:
+        page_count=0
+        recipe_count = 0
+        return render_template('glutenfree.html', offset=offset, limit=limit,
+                                                  recipe_count=recipe_count,
+                                                  page_count=page_count)
+                                                  
     return render_template('glutenfree.html', recipes=all_recipes,
                                               recipe_count=recipe_count,
                                               next_url=next_url,
@@ -292,16 +321,26 @@ def sort_nut_free():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
     starting_id = recipes.find({'contain_nuts': None}).sort('_id', pymongo.ASCENDING)
-    last_id = starting_id[offset]['_id']
-    all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_nuts': None}).limit(limit)
-    set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_nuts': None}).limit(limit)
-    num_recipes = offset
-    for number in set_of_recipes:
-        num_recipes += 1
-    next_url =  '/nut_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    previous_url = '/nut_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    try:    
+        last_id = starting_id[offset]['_id']
+        all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_nuts': None}).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_nuts': None}).limit(limit)
+        num_recipes = offset
+        for number in set_of_recipes:
+            num_recipes += 1
+        next_url =  '/nut_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
+        previous_url = '/nut_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    except:
+        page_count=0
+        recipe_count = 0
+        return render_template('nutfree.html', offset=offset, limit=limit,
+                                                  recipe_count=recipe_count,
+                                                  page_count=page_count)
+                                                  
     return render_template('nutfree.html', recipes=all_recipes,
                                               recipe_count=recipe_count,
                                               next_url=next_url,
@@ -324,16 +363,25 @@ def sort_lactose_free():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
     starting_id = recipes.find({'contain_lactose': None}).sort('_id', pymongo.ASCENDING)
-    last_id = starting_id[offset]['_id']
-    all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_lactose': None}).limit(limit)
-    set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_lactose': None}).limit(limit)
-    num_recipes = offset
-    for number in set_of_recipes:
-        num_recipes += 1
-    next_url =  '/lactose_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    previous_url = '/lactose_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    try:    
+        last_id = starting_id[offset]['_id']
+        all_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_lactose': None}).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'contain_lactose': None}).limit(limit)
+        num_recipes = offset
+        for number in set_of_recipes:
+            num_recipes += 1
+        next_url =  '/lactose_free?limit=' + str(limit) + '&offset=' + str(offset + limit)
+        previous_url = '/lactose_free?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    except:
+        page_count = 0
+        recipe_count = 0
+        return render_template('lactosefree.html', offset=offset, limit=limit,
+                                                  recipe_count=recipe_count,
+                                                  page_count=page_count)
+                                                  
     return render_template('lactosefree.html', recipes=all_recipes,
                                               recipe_count=recipe_count,
                                               next_url=next_url,
@@ -354,16 +402,27 @@ def sort_batch_cook():
     if 'limit' in request.args:
         limit = int(request.args['limit'])
     else:
-        limit = 9
+        limit = 12
+        
     starting_id = recipes.find({'batch_cook': True}).sort('_id', pymongo.ASCENDING)
-    last_id = starting_id[offset]['_id']
-    all_recipes = recipes.find({'_id': {'$gte': last_id}, 'batch_cook': True}).limit(limit)
-    set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'batch_cook': True}).limit(limit)
-    num_recipes = offset
-    for number in set_of_recipes:
-        num_recipes += 1
-    next_url =  '/batch_cook?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    previous_url = '/batch_cook?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    try:    
+        last_id = starting_id[offset]['_id']
+        all_recipes = recipes.find({'_id': {'$gte': last_id}, 'batch_cook': None}).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}, 'batch_cook': None}).limit(limit)
+        num_recipes = offset
+        for number in set_of_recipes:
+            num_recipes += 1
+        next_url =  '/batch_cook?limit=' + str(limit) + '&offset=' + str(offset + limit)
+        previous_url = '/batch_cook?limit=' + str(limit) + '&offset=' + str(offset - limit)
+    
+    except:
+        page_count = 0
+        recipe_count = 0
+        return render_template('batchcook.html', offset=offset, limit=limit,
+                                                  recipe_count=recipe_count,
+                                                  page_count=page_count)
+   
     return render_template('batchcook.html', recipes=all_recipes,
                                               recipe_count=recipe_count,
                                               next_url=next_url,

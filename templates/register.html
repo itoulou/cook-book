@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="container-login">
-        <div class="login-title center-align">
-            <h1>Welcome to the Pantry</h1>
-            <p>Please enter your username and password</p>
-        </div>
-        <div class="form-login center-align">
-            <form action="{{ url_for('register') }}" method="POST">
-                <label>username</label>
-                <input id="username" name="username" type="text" class="validate" required>
-                <label>password</label>
-                <input id="username" name="password" type="password" class="validate" required>
-                <p id="incorrect_login">{{incorrect_login}}</p>
-                <button>Register</button>
-            </form>
+    <div class="row">
+        <div class="container-login ">
+            <div class="container-form">
+                <div class="col s12 l8 login-title center-align welcome-login">
+                    <div class="opacity-welcome-login">
+                        <h1>Welcome to the
+                            <div class="pantry-font">Pantry.</div>
+                        </h1>
+                        <p>Please enter your username and password</p>
+                    </div>
+                </div>
+                <div class="col s12 l4 form-login center-align">
+                    <div class="bg-form-login">
+                        <form action="{{ url_for('register') }}" method="POST">
+                            <label>username</label>
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label>password</label>
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <p id="incorrect_login">{{incorrect_login}}</p>
+                            <button>Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

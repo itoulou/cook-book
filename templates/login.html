@@ -13,26 +13,33 @@
 </head>
 
 <body>
-    <div class="container-login">
-        <div class="col s12 login-title center-align">
-            <h1>Welcome to the Pantry</h1>
-            <p>Please enter your username and password</p>
-        </div>
-        <div class="col s12 form-login center-align">
-            <form action="{{ url_for('login') }}" method="POST">
-                <label>username</label>
-                <input id="username" name="username" type="text" class="validate" required>
-                <label>password</label>
-                <input id="username" name="password" type="password" class="validate" required>
-                <p id="incorrect_login">{{incorrect_login}}</p>
-                <button>Login</button>
-            </form>
-        </div>
-        <div class="col s12 center-align sign-up">
-            <p>Not registered yet? <a href="{{url_for('register')}}">Sign up</a> here</p>
+    <div class="row">
+        <div class="container-login ">
+            <div class="container-form">
+                <div class="col s12 l8 login-title center-align welcome-login">
+                    <div class="opacity-welcome-login">
+                        <h1>Welcome to the
+                            <div class="pantry-font">Pantry.</div>
+                        </h1>
+                        <p>Please enter your username and password</p>
+                    </div>
+                </div>
+                <div class="col s12 l4 form-login center-align">
+                    <div class="bg-form-login">
+                        <form action="{{ url_for('login') }}" method="POST">
+                            <label>username</label>
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label>password</label>
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <p id="incorrect_login">{{incorrect_login}}</p>
+                            <button>Login</button>
+                        </form>
+                        <p class="sign-in">Not registered yet? <a href="{{url_for('register')}}">Sign up</a> here</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
