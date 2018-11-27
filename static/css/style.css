@@ -457,10 +457,12 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     letter-spacing: 1px;
     display: inline-block;
 }
-.dropdown-recipes li:hover{
+
+.dropdown-recipes li:hover {
     background-color: #576783;
 }
-.dropdown-recipes a:hover{
+
+.dropdown-recipes a:hover {
     color: #dadada;
 }
 
@@ -823,6 +825,12 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     .add-edit-form {
         margin-bottom: 0%;
     }
+    .add-edit-button {
+        font-size: 30px;
+        padding-top: 2%;
+        padding-bottom: 6%;
+
+    }
     .add-edit-button:hover {
         background-color: #394356;
     }
@@ -834,6 +842,23 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         position: relative;
         bottom: 0;
     }
+    .filter-button {
+        width: 25%;
+        font-size: 25px;
+        padding: 1% 5%;
+    }
+    .dropdown-recipes {
+        width: 30% !important;
+    }
+
+    .dropdown-recipes li {
+        display: block;
+        padding: 3%;
+        width: auto;
+    }
+    .dropdown-recipes li a {
+        font-size: 25px;
+    }
 
     .recipes-header h1 {
         margin-top: 3%;
@@ -844,9 +869,26 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         position: relative;
         top: 5rem;
     }
+    .pagination li {
+        font-size: 35px;
+
+    }
     /*------------------viewrecipe.html*/
     .container-view {
         margin-top: 12%;
+    }
+    .view-ing-meth h5 {
+        margin-left: 7%;
+    }
+    .view-ingreds p {
+        font-size: 31px;
+    }
+    .view-method p {
+        font-size: 25px;
+    }
+    .view-allergens-row h5 {
+        margin-left: 4%;
+
     }
     .edit-recipe:hover {
         background-color: #3b693d;

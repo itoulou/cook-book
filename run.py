@@ -227,6 +227,19 @@ def num_thumb_up(recipe_id):
                                               name_of_dish=name_of_dish_caps,
                                               session_username=session_username)
 
+@app.route('/num_thumb_down/<recipe_id>', methods=["POST"])
+def num_thumb_down(recipe_id):
+    recipes = mongo.db.recipes
+    recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": -1}})
+    recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    name_of_dish_caps = recipe_selected['name_of_dish'].title()
+    username = recipe_selected['username']
+    session_username = session_user()
+    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+                                              username=username,
+                                              name_of_dish=name_of_dish_caps,
+                                              session_username=session_username)                                              
+
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
