@@ -635,13 +635,13 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     border: none;
 }
 
-.thumbs-up i {
+.thumb-up  {
     vertical-align: text-bottom;
     color: #fafafa;
     font-size: 45px;
 }
 
-.thumbs-up i.select-t-u {
+.select-t-u {
     vertical-align: text-bottom;
     color: #26a69a;
 }
