@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}Add Recipe{% endblock %}
+{% block content %}
 <form action="{{ url_for('insert_recipe') }}" method='POST' class="add-edit-form">
     <div class="input-field col s6">
         <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>

@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}View Recipe{% endblock %}
+{% block content %}
 <div class="container-view">
     <div class="row">
         <div class="col s12 center-align view-header">
@@ -66,10 +68,14 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{url_for('num_thumb_up', recipe_id=recipe_selected._id)}}" method='POST'>
+        <form action="{{url_for('edit_recipe', recipe_id=recipe_selected._id)}}" method='POST'>
             <div class="thumbs-up col s12 col l6">
                 <h5>Give this dish a thumbs up -</h5>
+                {% if clicked == "True" %}
+                <button class="thumbs-up-button"><i class="material-icons prefix thumb-up select-t-u">thumb_up</i></button>
+                {% else %}
                 <button class="thumbs-up-button"><i class="material-icons prefix thumb-up">thumb_up</i></button>
+                {% endif %}
             </div>
         </form>
     </div>
@@ -85,5 +91,6 @@
         </div>
     </div>
 </div>
-
+<h3>
+</h3>
 {% endblock %}
