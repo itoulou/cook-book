@@ -163,10 +163,13 @@ def edit_recipe(recipe_id):
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = compare_user(recipe_id)
+    # thumb_clicked = num_thumb_up(recipe_id)
     return render_template('viewrecipe.html', recipe_selected=recipe_selected,
                                               name_of_dish = name_of_dish_caps,
                                               username=username,
-                                              session_username=session_username)
+                                              session_username=session_username,
+                                            #   clicked=thumb_clicked
+                                              )
     
 
 @app.route('/edit_recipe/<recipe_id>')
@@ -217,7 +220,11 @@ def update_recipe(recipe_id):
 @app.route('/num_thumb_up/<recipe_id>', methods=["POST"])
 def num_thumb_up(recipe_id):
     recipes = mongo.db.recipes
-    recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": 1}})
+    liked = request.form['liked']
+    if liked:
+        recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": 1}})
+    else:
+        recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": -1}})
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = recipe_selected['username']
@@ -227,23 +234,9 @@ def num_thumb_up(recipe_id):
                                               name_of_dish=name_of_dish_caps,
                                               session_username=session_username)
 
-@app.route('/num_thumb_down/<recipe_id>', methods=["POST"])
-def num_thumb_down(recipe_id):
-    recipes = mongo.db.recipes
-    recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": -1}})
-    recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    name_of_dish_caps = recipe_selected['name_of_dish'].title()
-    username = recipe_selected['username']
-    session_username = session_user()
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
-                                              username=username,
-                                              name_of_dish=name_of_dish_caps,
-                                              session_username=session_username)                                              
-
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-    recipes = mongo.db.recipes.find()
     return redirect(url_for('all_recipes'))
 
 @app.route('/most_popular')
