@@ -572,7 +572,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     background-position: center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    border-radius: 5%;
+    border-radius: 10px;
 }
 
 .view-ing-meth h5 {
