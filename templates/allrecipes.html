@@ -33,7 +33,7 @@
                     <img class="recipe-images" src="{{ recipe.image_url }}">
                 </div>
                 <div class="card-content">
-                    <p>{{ recipe.name_of_dish.title() }}</p>
+                    <p>{{ recipe.name_of_dish.title() | truncate(21) }}</p>
                     <p>{{ recipe.cuisine }}</p>
                     <p>{{ recipe.cooking_time }}</p>
                 </div>
