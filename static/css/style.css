@@ -196,6 +196,7 @@ nav a.button-collapse i {
     min-width: 100%;
     background-color: #3c3c3d;
     flex: 1 0 auto;
+    padding-top: 7%;
 }
 
 .container {
@@ -732,9 +733,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         font-size: 25px;
     }
     /*-----------------index.html*/
-    .container-base {
-        height: 110%;
-    }
+
     /*-----------------add+editrecipe.html*/
     .add-edit-form {
         width: 60%;
@@ -804,6 +803,11 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     .index-card span {
         font-size: 30px;
     }
+    .search-add-recipe {
+        width: 100%;
+        margin-bottom: 8% !important;
+    }
+    
     .index-image-opacity:hover {
         background-color: rgba(0, 0, 0, 0.6);
     }
@@ -819,6 +823,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         font-size: 30px;
         padding-top: 2%;
         padding-bottom: 6%;
+        margin-bottom: 10%;
 
     }
     .add-edit-button:hover {
