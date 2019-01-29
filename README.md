@@ -57,107 +57,60 @@ cooking half a week's worth of food in one batch covering 6-8 meals.
 form on the 'add recipe' page.
 
 ### Filter
-* __All recipes__
-* __Most popular__
-* __Gluten Free__
-* __Nut Free__
-* __Lactose Free__
-* __Suitable for batch cooking__
+* User can click the 'Filter' button and display the following options:
+    * __All recipes__
+        * User can select to view all recipes in the order that they are created.
+    * __Most popular__
+        * User can filter recipes by the number of likes 
+    * __Gluten Free__
+        * User can filter recipes to display gluten free only  
+    * __Nut Free__
+        * User can filter recipes to display nut free only  
+    * __Lactose Free__
+        * User can filter recipes to display lactose free only  
+    * __Suitable for batch cooking__
+        * User can filter recipes to display the ones suitable to cooking in several batches
+        at once.
 
+### Up voting
+* __Voting for recipe__ 
+    * User can vote for any recipe they like by clicking the thumbs up button. 
+    If they wish to remove their vote they can do so by just toggling the like button
+    again.
 
-
-* __User Issues and Features__ - If a user has posted any issues or feature requests
-they will appear on their page with the option to choose which will be visible
-by clicking on the buttons 'My issues' and 'My features'.
-    * Screens greater than 992px width have pagination where they can switch pages
-    by clicking 'next' or 'previous'
-    
-    * Screens less than 992px have no pagination.
-
-### Issue Tracker
-* __All Issues__ - User can see all the issues by clicking 'Issues' button in navbar
-    * All issues are paginated every 9 issues displaying the title, votes, number
-    of comments, icon showing if Issue has been sorted or not and 'View issue' button. 
-    * User can view the particular issue by clicking either on the title or the
-    'View issue' button.
-    * If there are no comments on a particular issue, user can click 'Be the first to comment'
-    where they will directed precisely to the 'Add comment' button on the viewissue.html page.
-    * User can create a ticket by clicking 'Create a Ticket' where they will need to fill out a form
-    with a title of the issue and content of the issue and a tag. 
-    * User can search for a specific issue by name using the search form on the all issues page.
-    If the search returns nothing a message will pop up saying 'Unfortunately your search didn't find anything'.
-
-* __View issue__ 
-    * Any user can vote for the issue signalling that they have this issue
-    too by clikcing the chevron where the vote number will increase by 1 if toggled once
-    and decreased by 1 if toggled again.
-    * The author of the user can display whether or not the issue has been fixed by clicking
-    * the 'Done' button which will produce a red tick signalling that the issue has been fixed,
-    letting other users know that they have the same issue, they can find the solution here.
-    * Only the author of the issue can edit an issue. If they wish to do so then
-    they can click 'Edit issue' where they will be redirected to a form similar to that of 'Create a Ticket'.
-    * Only the author can delete the issue if they wish by clikcing 'Delete issue'.
-    * Any user can comment if they wish by clicking 'Add comment' by a which a modal will
-    appear where they would fill out a form with their comment content. This comment
-    will be displayed on the viewed issue page itself. 
-        * If there are more than 3 comments on that page then a button named 'View comments'
-        will appear whereby if clicked a modal will appear representing all the comments shown.
-        * All comments are in blockquote form where the user profile image is displayed next to their comment.
-    * Screens with width greater than 992px will have a 'Back' button displayed which will redirect them
-    back to the all issues page.
-
-### Feature Requests
-* __Requests behave in the exact same way as issue tracker except for a change depending
-on whether the user is subscribed or has already paid.__
-    * In order for a user to upvote a feature they must be subscribed. If user
-    is not subscribed and they try and vote, then user will be redirected to a checkout
-    form where they will fill out an address and card form with the price of £5.99.
-    * If user pays for this then they can vote for that particular feature but not any others.
-    * If user is subscribed they are able to vote for any feature.
-
-### Future features to implement
-* __Include graphs and figures__
-    * Representing the issues or features with the highest votes.
-    * Most common issues/feature ideas judging by similarity of titles.
-    * Perhaps in the future, in order to help my business model, represnt the
-    speed it takes me to fix issues and develop features.
-* Have the ability to add friends and share your own issues and feature ideas with them.
+### Update recipe and Delete recipe
+* If the user is the creator of the recipe then they are able to update their recipe
+by filling out the 'update recipe' form or delete the recipe by clicking the 'Delete'
+button.
 
 # Technologies used
 * [__HTML__](https://devdocs.io/html/) 
     * This project uses HTML to provide the content.
 * [__CSS__](https://devdocs.io/css/) 
     * This project uses CSS to provide the styles.
-* [__Bootstrap__](https://getbootstrap.com/docs/3.3/getting-started/)
-    * This project uses Bootstrap framework to simplify grid layout and provide a better UX. 
+* [__Materialize__](https://materializecss.com/getting-started.html)
+    * This project uses Materialize framework to simplify grid layout and provide a better UX. 
 * [__JQuery__](https://api.jquery.com/)
     * This project uses Jquery to simplify DOM manipulation and provide better UX.
 * [__Python__](https://docs.python.org/release/3.4.3/)
-    * This project uses Python to handle POSTs and manipulate data presented from the user. 
-* [__Django__](https://docs.djangoproject.com/en/1.11/)
-    * This project uses Django framework to provide a useful and comprehensible toolkit to a  build an effective web application. 
-* [__SQLite__](https://www.sqlite.org/docs.html)
-    * This project uses SQLite as database to use locally.
-* [__PostgreSQL__](https://www.postgresql.org/docs/)
-    * This project uses PostgreSQL as a database to use globally.
-* [__Amazon Web Services (AWS)__](https://docs.aws.amazon.com/index.html#lang/en_us)
-    * This project uses AWS (S3) as a means of storing media and static files. 
-* [__Stripe__](https://stripe.com/gb)
-    * This project uses Stripe as a payment service for users and to ensure that all security checks are dealt with. 
+    * This project uses Python to handle POSTs and manipulate data presented from the user.
+* [__Flask__](http://flask.pocoo.org/docs/1.0/)
+    * This project uses Flask to create URLs easily and use a tool to simplify the creation of this web application . 
+* [__mLab__](https://docs.mlab.com/)
+    * This project uses mLab as the NoSQL database.
 
 # Testing
 ### Login Form
 1. Go to 'Login' page.
 2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form with an invalid email address and verify that a relevant error message appears.
-4. Try to submit the form with all inputs valid and verify you are redirected to the homepage where a success message appears.
+3. Try to submit the form with an invalid username or password and verify that a relevant error message appears.
+4. Try to submit the form with all inputs valid and verify you are redirected to the index page.
 
 ### Register Form
 1. Go to 'Register' page.
 2. Try to submit the empty form and verify that an error message about the required fields appears.
 3. Try to submit the form with an email address already in use and verify that a relevant error message appears.
 4. Try to submit the form with username already in use and verify that a relevant error message appears.
-5. Try to submit the form with two different password and verify that a relevant error message appears.
 6. Try to submit the form with all inputs valid and verify you are redirected to the homepage where a success message appears.
 
 ### Subscription Address Form
