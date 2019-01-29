@@ -500,6 +500,10 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     font-size: 20px;
     letter-spacing: 2px;
 }
+.pagination {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
 
 .pagination li {
     font-size: 50px;
