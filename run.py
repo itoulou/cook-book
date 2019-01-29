@@ -101,6 +101,9 @@ def to_add_recipe_page():
     
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
+    """
+    Function that inserts recipe data to mongo db
+    """
     recipes = mongo.db.recipes
     recipe_dict = sanitize_form_dictionary(request.form.to_dict())
     recipe_dict['number_of_likes'] = 0
@@ -109,6 +112,9 @@ def insert_recipe():
     return redirect(url_for('all_recipes'))
     
 def sanitize_form_dictionary(recipe_dict):
+    """
+    Function to change booleans from form to True or False
+    """
     try:
         if recipe_dict['contain_gluten']=='on' or recipe_dict['contain_gluten']=='true':
             recipe_dict['contain_gluten']=True
@@ -137,6 +143,9 @@ def sanitize_form_dictionary(recipe_dict):
 
 @app.route('/all_recipes', methods=["GET"])
 def all_recipes():
+    """
+    Function that returns all recipes with pagination
+    """
     recipes = mongo.db.recipes
     total_recipe_count = mongo.db.recipes.count()
     if 'offset' in request.args:
@@ -178,7 +187,9 @@ def all_recipes():
     
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
-    print(recipe_id)
+    """
+    Function that redirects user to the recipe selected
+    """
     session_username = session_user()
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     name_of_dish_caps = recipe_selected['name_of_dish'].title()
@@ -204,6 +215,9 @@ def view_recipe(recipe_id):
 
 @app.route('/edit_recipe/<recipe_id>')
 def to_edit_recipe(recipe_id):
+    """
+    Function to return edit recipe form
+    """
     serves = ["1", "2", "3", "4", "5", "6+"]
     cuisine = [
                "African", "American", "British", "Carribean", "Chinese",
@@ -221,6 +235,9 @@ def to_edit_recipe(recipe_id):
 
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
+    """
+    Function to send updated data to mongo
+    """
     recipes = mongo.db.recipes
     recipe_selected = recipes.find_one({'_id': ObjectId(recipe_id)})
     liked_by_users = recipe_selected['liked_by']
@@ -243,6 +260,9 @@ def update_recipe(recipe_id):
     
 @app.route('/up_vote/<recipe_id>', methods=["POST"])
 def up_vote(recipe_id):
+    """
+    Function to deal with user toggling like button
+    """
     recipes = mongo.db.recipes
     liked = request.form['liked']
     session_username = session_user()
@@ -267,11 +287,17 @@ def up_vote(recipe_id):
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
+    """
+    Function to remove recipe from database
+    """
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('all_recipes'))
 
 @app.route('/most_popular')
 def sort_most_popular():
+    """
+    Function to sort all recipes by number of like
+    """
     recipes = mongo.db.recipes
     recipe_count = mongo.db.recipes.count()
     if 'offset' in request.args:
@@ -306,6 +332,9 @@ def sort_most_popular():
 
 @app.route('/gluten_free')
 def sort_gluten_free():
+    """
+    Function to sort all recipes by gluten free recipes
+    """
     recipes = mongo.db.recipes
     recipe_count = mongo.db.recipes.count({'contain_gluten': None})
     if 'offset' in request.args:
@@ -348,6 +377,9 @@ def sort_gluten_free():
     
 @app.route('/nut_free')
 def sort_nut_free():
+    """
+    Function to sort all recipes by nut free recipes
+    """
     recipes = mongo.db.recipes
     recipe_count = mongo.db.recipes.count({'contain_nuts': None})
     if 'offset' in request.args:
@@ -390,6 +422,9 @@ def sort_nut_free():
     
 @app.route('/lactose_free')
 def sort_lactose_free():
+    """
+    Function to sort all recipes by lactose free recipes
+    """
     recipes = mongo.db.recipes
     recipe_count = mongo.db.recipes.count({'contain_lactose': None})
     if 'offset' in request.args:
@@ -429,6 +464,9 @@ def sort_lactose_free():
 
 @app.route('/batch_cook')
 def sort_batch_cook():
+    """
+    Function to sort all recipes by recipes suitable for batch cooking
+    """
     recipes = mongo.db.recipes
     recipe_count = mongo.db.recipes.count({'batch_cook': True})
     if 'offset' in request.args:
