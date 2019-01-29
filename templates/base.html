@@ -69,11 +69,11 @@
                 e.preventDefault();
                 $('.thumb-up').toggleClass('select-t-u');
                 if($('.thumb-up').hasClass('select-t-u')){
-                    $.post('/num_thumb_up/'+ window.location.pathname.split("/view_recipe/")[1], {"liked": "True"} , function(data){
+                    $.post('/up_vote/'+ window.location.pathname.split("/view_recipe/")[1], {"liked": "True"} , function(data){
                     });
                 }
                 else {
-                    $.post('/num_thumb_up/'+ window.location.pathname.split("/view_recipe/")[1], {"liked": ""}, function(data){
+                    $.post('/up_vote/'+ window.location.pathname.split("/view_recipe/")[1], {"liked": ""}, function(data){
                     });
                 }
                
