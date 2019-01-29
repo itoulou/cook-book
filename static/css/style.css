@@ -22,6 +22,9 @@ body {
     font-family: panforte;
     margin: 0 auto;
     padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .pantry-font {
@@ -152,7 +155,6 @@ nav .brand-logo {
 }
 
 nav {
-    margin-bottom: 15%;
     background-color: #576783;
 }
 
@@ -193,7 +195,7 @@ nav a.button-collapse i {
 .container-base {
     min-width: 100%;
     background-color: #3c3c3d;
-    height: 100%;
+    flex: 1 0 auto;
 }
 
 .container {
@@ -201,7 +203,6 @@ nav a.button-collapse i {
 }
 
 .page-footer {
-    margin-top: 1%;
     padding-bottom: 7%;
     background: #576783;
     padding-top: 5px;
@@ -421,7 +422,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 }
 
 .filter-button {
-    width: 35%;
+    width: 25%;
     background-color: #576783;
     font-size: 35px;
     letter-spacing: 1px;
@@ -483,7 +484,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 
 .recipes-header h1 {
     color: #fafafa;
-    margin-top: -12%;
 }
 
 .recipe-images-div {
@@ -735,10 +735,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     .container-base {
         height: 110%;
     }
-
-    .page-footer {
-        position: relative;
-    }
     /*-----------------add+editrecipe.html*/
     .add-edit-form {
         width: 60%;
@@ -811,12 +807,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
     .index-image-opacity:hover {
         background-color: rgba(0, 0, 0, 0.6);
     }
-
-    .page-footer {
-        position: relative;
-        margin-top: 8%;
-        top: 150px;
-    }
     .footer-text p {
         font-size: 16px;
         letter-spacing: 0.5px;
@@ -843,7 +833,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         bottom: 0;
     }
     .filter-button {
-        width: 25%;
         font-size: 25px;
         padding: 1% 5%;
     }
@@ -865,10 +854,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
         margin-bottom: 4%;
     }
 
-    .pagination {
-        position: relative;
-        top: 5rem;
-    }
     .pagination li {
         font-size: 35px;
 
