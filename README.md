@@ -113,67 +113,31 @@ button.
 4. Try to submit the form with username already in use and verify that a relevant error message appears.
 6. Try to submit the form with all inputs valid and verify you are redirected to the homepage where a success message appears.
 
-### Subscription Address Form
-1. Click on the 'Subscribe' button.
+### Add Recipe and Edit Recipe Form
+1. Click on the 'Add recipe' button.
 2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form without any address details except 'County' and verify that a relevant error message appears.
-4. Try to submit the form with all inputs valid and verify you are redirected to the homepage where a success message appears and subscribe button changes to 'Unsubscribe'.
+3. Try to submit the form with all inputs valid and verify you are redirected to the 'all recipes' page.
 
-### Profile Picture Form
-1. Click on either the image or 'Add a profile picture'.
-2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form with a valid image then image appears and options to change or remove image appear.
-4. Same testing applies when 'Change profile picture is clicked'.
+### Like/Up vote
+1. Click the  or thumb icon to turn it blue.
+2. Verify that username of the user who liked the recipes is added to an array under 'liked_by' key in database.
+3. Verify that 'number_of_likes' is incremented by 1.
+4. Click the thumb icon again so it turns white.
+5. Verify that username of the user who liked the recipes is removed from array.
+6. Verify that 'number_of_likes' is decremented by 1.
 
-### My Issues and My Features
-1. Click either 'My Issues' or 'My Features' and user's items appear.
-2. If user has no issues posted or feature requests posted a message appears with option to create one.
-
-### Create/Edit Issue and Create/Edit Feature
-1. Click 'Create Ticket'/'Create Request'/'Edit Issue'/'Edit Feature'.
-2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form with all inputs valid and verify you are redirected to item just created or edited with details 
-just submitted from previous form.
-
-### Search
-1. Type in the input
-2. If words match then it will return all issues and feature requests relative to the 
-information given from the user.
-3. Try to submit an empty form and returns everything as normal.
-4. If search doesn't match with any items in the database then error message appears.
-
-
-### Comments
-1. Click 'Add comment'.
-2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form with all inputs valid and verify you are redirected to view issue/feature page where your comment
-appears with the user profile image.
-
-### Voting for Feature
-1. Click chevron icon to upvote feature.
-2. If user subscribed and chevron clicked number of votes increases by 1.
-3. If user is not subscribed they are redirected to Checkout page.
-
-### Checkout page
-2. Try to submit the empty form and verify that an error message about the required fields appears.
-3. Try to submit the form without any address details except 'County' and verify that a relevant error message appears.
-4. Try to submit the form with all inputs valid and verify you are redirected to the 'view issue' page where a success message appears 
-5. Try to vote for same feature and vote number should increase by 1.
-6. Try to vote for different feature and verify you are redirected to 'checkout' page.
-
-[![Build Status](https://travis-ci.org/itoulou/unicorn-attractor.svg?branch=master)](https://travis-ci.org/itoulou/unicorn-attractor)
+### Pagination
+1. Verify that both chevron buttons are disabled when recipe count is less than 12.
+2. When recipe count is greater than 12, verify that right chevron is no longer disabled.
+2. If right chevron clicked then verify next set of 12 recipes is displayed and left chevron no longer disabled.
+3. If left chevron clicked then verify that previous set of 12 is displayed.
 
 # Deployment
 I have deployed this project to the hosting platform [__Heroku__](https://devcenter.heroku.com/categories/reference)
 with a separate [__GitHub__](https://github.com/) branch.
 ### Config Vars
-* AWS_ACCESS_KEY_ID
-* AWS_SECRET_ACCESS_KEY
-* DATABASE_URL
-* DISABLE_COLLECTSTATIC
-* SECRET_KEY
-* STRIPE_PUBLISHABLE
-* STRIPE_SECRET
+* IP
+* PORT
 
 # Credits
 ### Acknowledgments
