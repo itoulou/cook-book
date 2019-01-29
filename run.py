@@ -152,8 +152,8 @@ def all_recipes():
     starting_id = recipes.find().sort('_id', pymongo.ASCENDING)
     try:
         last_id = starting_id[offset]['_id']
-        all_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
-        set_of_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.ASCENDING).limit(limit)
+        all_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.DESCENDING).limit(limit)
+        set_of_recipes = recipes.find({'_id': {'$gte': last_id}}).sort('_id', pymongo.DESCENDING).limit(limit)
         num_recipes = offset
         for number in set_of_recipes:
             num_recipes += 1
