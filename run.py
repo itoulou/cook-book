@@ -14,10 +14,16 @@ app.config["MONGO_URI"] = 'mongodb://itoulou:Woro4260@ds113923.mlab.com:13923/on
 mongo = PyMongo(app)
 
 def session_user():
+    """
+    Function returns user in session
+    """
     if 'username' in session:
         return session['username']
 
 def compare_user(recipe_id):
+    """
+    Function to check if user in session for editing recipes
+    """
     session_username = session_user()
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     
@@ -30,6 +36,9 @@ def compare_user(recipe_id):
 
 @app.route('/', methods=["POST", "GET"])
 def login():
+    """
+    Function where user can login if username and password in form match database
+    """
     users = mongo.db.users
     user = users.find_one({'username': request.form.get('username')})
     login_username = request.form.get('username')
@@ -45,6 +54,9 @@ def login():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    """
+    User can register if not logged in already
+    """
     incorrect_login = 'Username already in use'
     if request.method == 'POST':
         users = mongo.db.users
@@ -61,11 +73,17 @@ def register():
 
 @app.route('/home')
 def index():
+    """
+    Function that directs user to homepage
+    """
     username = session_user()
     return render_template('index.html', username=username)
 
 @app.route('/add_recipe')
 def to_add_recipe_page():
+    """
+    Function to redirect user to add recipe form
+    """
     serves = ["1", "2", "3", "4", "5", "6+"]
     cuisine = [
                "African", "American", "British", "Carribean", "Chinese",
@@ -86,6 +104,7 @@ def insert_recipe():
     recipes = mongo.db.recipes
     recipe_dict = sanitize_form_dictionary(request.form.to_dict())
     recipe_dict['number_of_likes'] = 0
+    recipe_dict['liked_by'] = []
     recipes.insert_one(recipe_dict)
     return redirect(url_for('all_recipes'))
     
@@ -158,17 +177,28 @@ def all_recipes():
                                               
     
 @app.route('/view_recipe/<recipe_id>')
-def edit_recipe(recipe_id):
+def view_recipe(recipe_id):
+    print(recipe_id)
     session_username = session_user()
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = compare_user(recipe_id)
-    # thumb_clicked = num_thumb_up(recipe_id)
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+    liked_by_users = recipe_selected['liked_by']
+    if liked_by_users:
+        for liked_by_user in liked_by_users:
+            if liked_by_user == session_username:
+                liked_by_user = True
+                break
+            else:
+                liked_by_user = False
+    else:
+        liked_by_user = False
+    print(liked_by_user, "A")    
+    return render_template('viewrecipe.html', recipe=recipe_selected,
                                               name_of_dish = name_of_dish_caps,
                                               username=username,
                                               session_username=session_username,
-                                            #   clicked=thumb_clicked
+                                              liked_by_user=liked_by_user,
                                               )
     
 
@@ -192,8 +222,9 @@ def to_edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     recipes = mongo.db.recipes
-    
-    recipes.update( {"_id": ObjectId(recipe_id)}, sanitize_form_dictionary({
+    recipe_selected = recipes.find_one({'_id': ObjectId(recipe_id)})
+    liked_by_users = recipe_selected['liked_by']
+    recipes.update({"_id": ObjectId(recipe_id)}, sanitize_form_dictionary({
         "username": request.form.get('username'),
         "name_of_dish": request.form.get('name_of_dish'),
         "serves": request.form.get('serves'),
@@ -205,34 +236,34 @@ def update_recipe(recipe_id):
         "contain_lactose": request.form.get('contain_lactose'),
         "contain_nuts": request.form.get('contain_nuts'),
         "batch_cook": request.form.get('batch_cook'),
-        "image_url": request.form.get('image_url')
+        "image_url": request.form.get('image_url'),
+        "liked_by": liked_by_users
     }))
+    return redirect(url_for('view_recipe', recipe_id=recipe_id))
     
-    recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    username = recipe_selected['username']
-    name_of_dish_caps = recipe_selected['name_of_dish'].title()
-    session_username = session_user()
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
-                                              username=username,
-                                              name_of_dish=name_of_dish_caps,
-                                              session_username=session_username)
-    
-@app.route('/num_thumb_up/<recipe_id>', methods=["POST"])
-def num_thumb_up(recipe_id):
+@app.route('/up_vote/<recipe_id>', methods=["POST"])
+def up_vote(recipe_id):
     recipes = mongo.db.recipes
     liked = request.form['liked']
+    session_username = session_user()
     if liked:
-        recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": 1}})
+        recipes.update({"_id": ObjectId(recipe_id)},
+                        {"$inc": { "number_of_likes": 1},
+                         "$push": {"liked_by": session_username}
+                        })
     else:
-        recipes.update({"_id": ObjectId(recipe_id)}, { "$inc": { "number_of_likes": -1}})
+        recipes.update({"_id": ObjectId(recipe_id)},
+                        { "$inc": { "number_of_likes": -1},
+                          "$pull": {"liked_by": session_username}
+                        })
     recipe_selected = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     name_of_dish_caps = recipe_selected['name_of_dish'].title()
     username = recipe_selected['username']
-    session_username = session_user()
-    return render_template('viewrecipe.html', recipe_selected=recipe_selected,
+    return render_template('viewrecipe.html', recipe=recipe_selected,
                                               username=username,
                                               name_of_dish=name_of_dish_caps,
-                                              session_username=session_username)
+                                              session_username=session_username,
+                                              )
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):

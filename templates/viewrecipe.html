@@ -9,58 +9,58 @@
     </div>
     <div class="row">
         <div class="col s12 center-align view-recipe-imgdiv">
-            <div class="view-recipe-image" style="background:url('{{recipe_selected.image_url}}')"></div>
+            <div class="view-recipe-image" style="background:url('{{recipe.image_url}}')"></div>
         </div>
     </div>
     <div class="row view-selected-row">
         <div class="col s4 view-selected">
             <h5>Origin of the dish</h5><i class="fa fa-globe globe-icon"></i>
-            <h1>{{ recipe_selected.cuisine }}</h1>
+            <h1>{{ recipe.cuisine }}</h1>
         </div>
         <div class="col s4 view-selected">
             <h5>Serves</h5><i class="material-icons">local_dining</i>
-            <h1>{{ recipe_selected.serves }}</h1>
+            <h1>{{ recipe.serves }}</h1>
         </div>
         <div class="col s4 view-selected">
             <h5>Cooking Time</h5><i class="material-icons">watch_later</i>
-            <h1>{{ recipe_selected.cooking_time }}</h1>
+            <h1>{{ recipe.cooking_time }}</h1>
         </div>
     </div>
     <div class="row">
         <div class="col s12 l6 view-ing-meth view-ingreds">
             <h5>Ingredients:</h5>
-            <pre><p>{{ recipe_selected.ingredients }}</p></pre>
+            <pre><p>{{ recipe.ingredients }}</p></pre>
         </div>
         <div class="col s12 l6 view-ing-meth view-method">
             <h5>Preparation:</h5>
-            <pre><p>{{ recipe_selected.method }}</p></pre>
+            <pre><p>{{ recipe.method }}</p></pre>
         </div>
     </div>
     <div class="row view-allergens-row">
         <h5>This dish is -</h5>
         <div class="col s12 col l6 center-align">
-            {% if recipe_selected.contain_gluten == True %}
+            {% if recipe.contain_gluten == True %}
             <h3>- <span class="warning">NOT</span> gluten free -</h3>
             {% else %}
             <h3>- gluten <span class="free-from">FREE</span> -</h3>
             {% endif %}
         </div>
         <div class="col s12 col l6 center-align">
-            {% if recipe_selected.contain_nuts == True %}
+            {% if recipe.contain_nuts == True %}
             <h3>- <span class="warning">NOT</span> nut free -</h3>
             {% else %}
             <h3>- nut <span class="free-from">FREE</span> -</h3>
             {% endif %}
         </div>
         <div class="col s12 col l6 center-align">
-            {% if recipe_selected.contain_lactose == True %}
+            {% if recipe.contain_lactose == True %}
             <h3>- <span class="warning">NOT</span> lactose free -</h3>
             {% else %}
             <h3>- lactose <span class="free-from">FREE</span> -</h3>
             {% endif %}
         </div>
         <div class="col s12 col l6 center-align">
-            {% if recipe_selected.batch_cook == True %}
+            {% if recipe.batch_cook == True %}
             <h3>- <span class="free-from">Suitable</span> for batch cooking -</h3>
             {% else %}
             <h3>- <span class="warning">NOT</span> suitable for batch cooking -</h3>
@@ -68,10 +68,10 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{url_for('edit_recipe', recipe_id=recipe_selected._id)}}" method='POST'>
+        <form action="{{url_for('view_recipe', recipe_id=recipe._id)}}" method='POST'>
             <div class="thumbs-up col s12 col l6">
                 <h5>Give this dish a thumbs up -</h5>
-                {% if clicked == "True" %}
+                {% if liked_by_user %}
                 <button class="thumbs-up-button"><i class="material-icons prefix thumb-up select-t-u">thumb_up</i></button>
                 {% else %}
                 <button class="thumbs-up-button"><i class="material-icons prefix thumb-up">thumb_up</i></button>
@@ -82,12 +82,12 @@
     <div class="row">
         {% if username == session_username %}
         <div class="col s12 edit-delete-btn">
-            <a href="{{ url_for('to_edit_recipe', recipe_id=recipe_selected._id) }}" class="btn btn_medium edit-recipe">Edit Recipe</a>
-            <a href="{{ url_for('delete_recipe', recipe_id=recipe_selected._id) }}" id="delete_recipe" class="btn btn_medium delete_recipe">Delete Recipe</a>
+            <a href="{{ url_for('to_edit_recipe', recipe_id=recipe._id) }}" class="btn btn_medium edit-recipe">Edit Recipe</a>
+            <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" id="delete_recipe" class="btn btn_medium delete_recipe">Delete Recipe</a>
         </div>
         {% endif %}
         <div class="col s12 view-back-btn">
-            <a href="javascript:history.back()" class="back-btn btn btn_medium">Back</a>
+            <a href="{{ url_for('all_recipes') }}" class="back-btn btn btn_medium">Back</a>
         </div>
     </div>
 </div>
