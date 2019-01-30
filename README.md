@@ -119,7 +119,7 @@ button.
 3. Try to submit the form with all inputs valid and verify you are redirected to the 'all recipes' page.
 
 ### Like/Up vote
-1. Click the  or thumb icon to turn it blue.
+1. Click the thumb icon to turn it blue.
 2. Verify that username of the user who liked the recipes is added to an array under 'liked_by' key in database.
 3. Verify that 'number_of_likes' is incremented by 1.
 4. Click the thumb icon again so it turns white.
