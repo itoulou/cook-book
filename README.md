@@ -28,6 +28,23 @@ provide a section dedicated to these users where you can search for recipes that
 are suitable for cooking several portions and able to reheat later, essentially
 cooking half a week's worth of food in one batch covering 6-8 meals.
 
+### All Recipes
+__md/lg__
+
+![all recipes image](/wireframes/images/all-recipes-md-lg.png "all recipes md lg")
+
+__xs/sm__
+
+![all recipes image](/wireframes/images/all-recipes-xs-sm.png "all recipes xs sm")
+
+__md/lg__
+
+![view recipe image](/wireframes/images/view-recipe-md-lg.png "view recipe md lg")
+
+__xs/sm__
+
+![view recipe image](/wireframes/images/view-recipe-xs-sm.png "view recipe xs sm")
+
 # Features
 ### Login
 * __Login__
