@@ -37,6 +37,7 @@ __xs/sm__
 
 ![all recipes image](/wireframes/images/all-recipes-xs-sm.png "all recipes xs sm")
 
+### View Recipe
 __md/lg__
 
 ![view recipe image](/wireframes/images/view-recipe-md-lg.png "view recipe md lg")
