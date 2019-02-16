@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Most Popular Recipes{% endblock %}
 {% block content %}
+<!-----Filter---->
 <div class="row">
     <div class="col s12 side-nav-row">
         <div class="side-nav-container">
@@ -28,6 +29,7 @@
     </div>
 </div>
 <div class="row">
+    <!-----Recipe thumbnails---->
     {% for recipe in most_popular %}
     <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
         <div class="card-image col s6 col m6 col l3 center-align">
@@ -44,6 +46,7 @@
         </div>
     </a>
     {% endfor %}
+    <!-----Pagination---->
     <div class="row">
         <div class="col s12 center-align">
             <ul class="pagination">

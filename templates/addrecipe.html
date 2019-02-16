@@ -2,14 +2,17 @@
 {% block title %}Add Recipe{% endblock %}
 {% block content %}
 <form action="{{ url_for('insert_recipe') }}" method='POST' class="add-edit-form">
+    <!------username------>
     <div class="input-field col s6">
         <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>
         <label for="first_name">Username</label>
     </div>
+    <!------Dish Name------>
     <div class="input-field col s6">
         <input id="name_of_dish" name="name_of_dish" type="text" class="validate" required>
         <label for="last_name">Name of the Dish</label>
     </div>
+    <!------Serves------>
     <div class="input-field col s6">
         <select id="serves" name="serves" required>
           <option value="" disabled selected>How many does it serve?</option>
@@ -19,6 +22,7 @@
         </select>
         <label>Serves</label>
     </div>
+    <!------Cuisine------>
     <div class="input-field col s6">
         <select id="cuisine" name="cuisine" required>
           <option value="" disabled selected>Choose Cuisine</option>
@@ -28,6 +32,7 @@
         </select>
         <label>Cuisine</label>
     </div>
+    <!------Cooking Time------>
     <div class="input-field col s6">
         <select id="cooking_time" name="cooking_time" required>
           <option value="" disabled selected>Cooking Time</option>
@@ -37,14 +42,17 @@
         </select>
         <label>Cooking Time</label>
     </div>
+    <!------Ingredients------>
     <div class="input-field col s12">
         <textarea id="ingredients" name="ingredients" class="materialize-textarea" required></textarea>
         <label for="textarea1">Ingredients</label>
     </div>
+    <!------Method------>
     <div class="input-field col s12">
         <textarea id="method" name="method" class="materialize-textarea" required></textarea>
         <label for="textarea1">Cooking Instructions</label>
     </div>
+    <!------Allergens------>
     <div class="switch">
         <label>
           Contain Nuts?
@@ -73,6 +81,7 @@
           <span class="lever"></span>
         </label>
     </div>
+    <!------Image------>
     <div class="input-field col s6">
         <input id="image_url" name="image_url" type="text" class="validate" required>
         <label for="first_name">Image URL</label>

@@ -2,16 +2,19 @@
 {% block title %}View Recipe{% endblock %}
 {% block content %}
 <div class="container-view">
+    <!-----Recipe title and author---->
     <div class="row">
         <div class="col s12 center-align view-header">
             <h2><span>{{ name_of_dish }}</span> by <span>{{ username }}</span></h2>
         </div>
     </div>
+    <!-----Recipe image---->
     <div class="row">
         <div class="col s12 center-align view-recipe-imgdiv">
             <div class="view-recipe-image" style="background:url('{{recipe.image_url}}')"></div>
         </div>
     </div>
+    <!-----Cuisine, serves, cooking time---->
     <div class="row view-selected-row">
         <div class="col s4 view-selected">
             <h5>Origin of the dish</h5><i class="fa fa-globe globe-icon"></i>
@@ -26,6 +29,7 @@
             <h1>{{ recipe.cooking_time }}</h1>
         </div>
     </div>
+    <!-----Ingredients and Method---->
     <div class="row">
         <div class="col s12 l6 view-ing-meth view-ingreds">
             <h5>Ingredients:</h5>
@@ -36,6 +40,7 @@
             <pre><p>{{ recipe.method }}</p></pre>
         </div>
     </div>
+    <!-----Allergens---->
     <div class="row view-allergens-row">
         <h5>This dish is -</h5>
         <div class="col s12 col l6 center-align">
@@ -67,6 +72,7 @@
             {% endif %}
         </div>
     </div>
+    <!-----Like button---->
     <div class="row">
         <form action="{{url_for('view_recipe', recipe_id=recipe._id)}}" method='POST'>
             <div class="thumbs-up col s12 col l6">
@@ -79,6 +85,7 @@
             </div>
         </form>
     </div>
+    <!-----Edit and Delete if logged in---->
     <div class="row">
         {% if username == session_username %}
         <div class="col s12 edit-delete-btn">

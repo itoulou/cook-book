@@ -2,105 +2,86 @@
 {% block title %}Edit Recipe{% endblock %}
 {% block content %}
 <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method='POST' class="add-edit-form">
+    <!------username------>
     <div class="input-field col s6">
         <input id="username" name="username" type="text" class="validate" value="{{username}}" readonly>
         <label for="first_name">Username</label>
     </div>
+    <!------Dish Name------>
     <div class="input-field col s6">
-        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" value="{{recipe.name_of_dish}}" required>
+        <input id="name_of_dish" name="name_of_dish" type="text" class="validate" required>
         <label for="last_name">Name of the Dish</label>
     </div>
+    <!------Serves------>
     <div class="input-field col s6">
-        <select id="serves" name="serves">
+        <select id="serves" name="serves" required>
           <option value="" disabled selected>How many does it serve?</option>
           {% for number in serves %}
-              {% if number == recipe.serves %}
-              <option value="{{number}}" selected>{{number}}</option>
-              {% else %}
-              <option value="{{number}}" >{{number}}</option>
-              {% endif %}
+          <option value="{{number}}">{{number}}</option>
           {% endfor %}
         </select>
         <label>Serves</label>
     </div>
+    <!------Cuisine------>
     <div class="input-field col s6">
-        <select id="cuisine" name="cuisine">
+        <select id="cuisine" name="cuisine" required>
           <option value="" disabled selected>Choose Cuisine</option>
           {% for cuisine in cuisine %}
-              {% if cuisine == recipe.cuisine %}
-                  <option value="{{cuisine}}" selected>{{cuisine}}</option>
-                  {% else %}
-                  <option value="{{cuisine}}" >{{cuisine}}</option>
-              {% endif %}
+          <option value="{{cuisine}}">{{cuisine}}</option>
           {% endfor %}
         </select>
         <label>Cuisine</label>
     </div>
+    <!------Cooking Time------>
     <div class="input-field col s6">
-        <select id="cooking_time" name="cooking_time">
+        <select id="cooking_time" name="cooking_time" required>
           <option value="" disabled selected>Cooking Time</option>
           {% for cooking_time in cooking_times %}
-              {% if cooking_time == recipe.cooking_time %}
-                  <option value="{{cooking_time}}" selected>{{cooking_time}}</option>
-                  {% else %}
-                  <option value="{{cooking_time}}" >{{cooking_time}}</option>
-              {% endif %}
+          <option value="{{cooking_time}}">{{cooking_time}}</option>
           {% endfor %}
         </select>
         <label>Cooking Time</label>
     </div>
+    <!------Ingredients------>
     <div class="input-field col s12">
-        <textarea id="ingredients" name="ingredients" class="materialize-textarea" required>{{recipe.ingredients}}</textarea>
+        <textarea id="ingredients" name="ingredients" class="materialize-textarea" required></textarea>
         <label for="textarea1">Ingredients</label>
     </div>
+    <!------Method------>
     <div class="input-field col s12">
-        <textarea id="method" name="method" class="materialize-textarea" required>{{recipe.method}}</textarea>
+        <textarea id="method" name="method" class="materialize-textarea" required></textarea>
         <label for="textarea1">Cooking Instructions</label>
     </div>
+    <!------Allergens------>
     <div class="switch">
         <label>
           Contain Nuts?
-          {% if recipe.contain_nuts %}
-          <input id="contain_nuts" name="contain_nuts" type="checkbox" checked>
-          {% else %}
           <input id="contain_nuts" name="contain_nuts" type="checkbox">
-          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Contain Gluten?
-          {% if recipe.contain_gluten %}
-          <input id="contain_gluten" name="contain_gluten" type="checkbox" checked>
-          {% else %}
-          <input id="contain_gluten" name="contain_gluten" type="checkbox">
-          {% endif %}
+          <input id="contain_gluten" name="contain_gluten" type="checkbox" value="true">
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Contain lactose?
-          {% if recipe.contain_lactose %}
-          <input id="contain_lactose" name="contain_nuts" type="checkbox" checked>
-          {% else %}
           <input id="contain_lactose" name="contain_lactose" type="checkbox">
-          {% endif %}
           <span class="lever"></span>
         </label>
     </div>
     <div class="switch">
         <label>
           Suitable for Batch Cooking?
-          {% if recipe.batch_cook %}
-          <input id="batch_cook" name="batch_cook" type="checkbox" checked>
-          {% else %}
-          <input id="batch_cook" name="batch_cook" type="checkbox">
-          {% endif %}
+          <input id="batch_cook" name="batch_cook" type="checkbox" value="true">
           <span class="lever"></span>
         </label>
     </div>
+    <!------Image------>
     <div class="input-field col s6">
         <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}" required>
         <label for="first_name">Image URL</label>
