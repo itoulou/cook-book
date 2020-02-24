@@ -8,7 +8,7 @@ Werkzeug==0.14.1
 backcall==0.1.0
 backports-abc==0.5
 beautifulsoup4==4.6.3
-bleach==3.0.2
+bleach==3.1.1
 chardet==2.2.1
 click==6.7
 colorama==0.2.5
