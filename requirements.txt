@@ -2,7 +2,7 @@ Flask==1.0.2
 Flask-PyMongo==2.1.0
 Jinja2==2.10
 MarkupSafe==1.0
-Pygments==2.2.0
+Pygments==2.7.4
 Send2Trash==1.5.0
 Werkzeug==0.14.1
 backcall==0.1.0
